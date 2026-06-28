@@ -23,6 +23,7 @@ gelinkt Markdown-bestand. ID's zijn stabiel en grep-baar.
 | `dec-agents-md-canoniek` | `AGENTS.md` canoniek; `CLAUDE.md` is pointer | active |
 | `dec-github-template` | Distributie via GitHub template repository | active |
 | `dec-projecten-private` | Projecten gemaakt mét de kit zijn standaard private | active |
+| `dec-onboarding-via-agent` | Onboarding via agent-interview (skill), niet via flags | active |
 
 ## Checks
 | ID | Verifieert | Status |

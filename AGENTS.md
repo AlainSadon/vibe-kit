@@ -6,6 +6,11 @@
 > stap-voor-stap procedures staan in [`skills/`](skills/) en laden pas wanneer je ze nodig hebt.
 > Methode afgeleid van Omar Ismail's *Making English a Programming Language* (MIT).
 
+> **Eerste run (vers project):** staat hierboven nog de letterlijke `[PROJECT: …]`-placeholder, dan is
+> dit project nog niet ingericht — volg dan eerst de skill
+> [`start-project`](skills/start-project/SKILL.md) vóór ander werk. (Werk je aan vibe-kit zélf? Dan is
+> de placeholder bewust leeg en is onboarding niet van toepassing.)
+
 ## Kernidee
 
 Code legt vast *hóé* iets gebouwd is, niet *waaróm*. Bij snel AI-gestuurd bouwen gaat die bedoeling
@@ -75,6 +80,7 @@ units; forceer geen volledige wiki vooraf. Zie [`wiki/index.md`](wiki/index.md).
 
 | Skill | Wanneer |
 |-------|---------|
+| [`start-project`](skills/start-project/SKILL.md) | eerste run — vers template-project inrichten (onboarding) |
 | [`propose-change`](skills/propose-change/SKILL.md) | substantiële wijziging — schrijf het voorstel vóór code |
 | [`compile-change`](skills/compile-change/SKILL.md) | na goedkeuring — compileer voorstel naar code + checks |
 | [`reconcile-wiki`](skills/reconcile-wiki/SKILL.md) | drift-loops draaien en wiki bijwerken |

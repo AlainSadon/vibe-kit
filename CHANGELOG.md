@@ -20,3 +20,6 @@ Alle noemenswaardige wijzigingen aan vibe-kit. Formaat losjes gebaseerd op
   wiki-units en `playbook.md` verwijzen ernaar in plaats van de argumentatie te dupliceren.
 - `scripts/init-project.mjs`: eenmalige reset voor een vers-uit-de-template project — wist vibe-kit's
   eigen wiki/docs, zet blanco sjablonen terug, verwijdert het dogfood-anker en ruimt zichzelf op.
+- Skill `start-project` + eerste-run-trigger in `AGENTS.md`: de agent richt een vers project in via een
+  kort onboarding-gesprek (projectdoel, reset, checks-commando) — geen handmatige edits meer nodig.
+  Beslissing vastgelegd in `dec-onboarding-via-agent`.

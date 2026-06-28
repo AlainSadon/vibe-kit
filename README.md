@@ -43,19 +43,18 @@ cd <project>
 ```
 
 Daarna:
-1. **Reset naar een blanco intentie-laag** (eenmalig). Het sjabloon erft de wiki/docs van vibe-kit
-   zélf; dit script wist die meta-inhoud, zet blanco sjablonen terug, ruimt het dogfood-anker op en
-   verwijdert zichzelf:
-   ```sh
-   node scripts/init-project.mjs          # dry-run: laat zien wat er gebeurt
-   node scripts/init-project.mjs --yes    # voer de reset uit
-   ```
-2. Pas de `[PROJECT: …]`-placeholder bovenaan `AGENTS.md` aan.
-3. Stel je eerste substantiële vraag aan de agent → die maakt `wiki/` aan en schrijft een
+1. **Open de agent in het project** (bv. `claude`). Bij een verse template-clone start hij
+   automatisch de **onboarding** (skill [`start-project`](skills/start-project/SKILL.md)): hij vraagt
+   wat het project doet (→ vult `AGENTS.md` in), draait de reset naar een blanco intentie-laag, en zet
+   je test-/checks-commando. Geen handmatig editen nodig.
+2. Stel je eerste substantiële vraag aan de agent → die maakt `wiki/` aan en schrijft een
    **voorstel** in gewone taal.
-4. Jij keurt het voorstel goed (of stuurt bij) → de agent compileert naar code met checks en
+3. Jij keurt het voorstel goed (of stuurt bij) → de agent compileert naar code met checks en
    `PW:`-ankers.
-5. Periodiek: laat de agent de drift-loops draaien (`node scripts/drift-check.mjs`).
+4. Periodiek: laat de agent de drift-loops draaien (`node scripts/drift-check.mjs`).
+
+> Liever handmatig resetten? `node scripts/init-project.mjs` (dry-run) toont wat er gebeurt;
+> `--yes` voert het uit.
 
 > Liever geen GitHub-template? `npx degit <username>/vibe-kit <project>` kopieert de bestanden ook,
 > maar zonder automatische repo-koppeling.
