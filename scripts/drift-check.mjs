@@ -27,7 +27,7 @@ import { execSync } from "node:child_process";
 const CONFIG = {
   wikiDir: "wiki",                 // waar de intentie-units staan
   // Mappen die nooit gescand worden op ankers:
-  ignoreDirs: ["node_modules", ".git", "dist", "build", "out", "coverage", "wiki", ".next", "vendor"],
+  ignoreDirs: ["node_modules", ".git", "dist", "build", "out", "coverage", "wiki", ".next", "vendor", ".vibe-kit-install"],
   // Bestandsextensies die als "code" gelden voor de anker-scan:
   codeExts: [".ts", ".tsx", ".js", ".jsx", ".mjs", ".cjs", ".py", ".go", ".rs", ".java", ".rb", ".php", ".cs", ".kt", ".swift", ".css", ".scss", ".vue", ".svelte", ".sql", ".sh"],
   // Unit-types die in code verankerd én getest horen te zijn:

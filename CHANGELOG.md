@@ -8,6 +8,9 @@ Alle noemenswaardige wijzigingen aan vibe-kit. Formaat losjes gebaseerd op
 ### Changed
 - `start-project` stelt de reset-vraag nu in mensentaal (geen interne unit-id's) — gevonden tijdens
   een dogfood-test. Eerste les vastgelegd in `playbook.md`.
+- `drift-check` negeert nu `.vibe-kit-install` (de tijdelijke installatiemap), zodat de meegekopieerde
+  kit-scripts geen vals "verweesd anker" geven; `add-to-project` zet de opruim-stap vóór de drift-check.
+  Gevonden bij een dogfood-test op een bestaand project.
 - README herschreven voor een breder publiek: toegankelijke uitleg van probleem en aanpak, een
   "onder de motorkap"-sectie (notities, `PW:`-ankers, de bewaker) en een "vibe-kit of Product Wiki?"
   positioneringsblok. Technische installatie apart gezet.
