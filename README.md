@@ -106,9 +106,9 @@ je test-commando. Daarna stel je je eerste vraag en begint de werkwijze hierbove
 | `skills/` | stap-voor-stap recepten voor de assistent |
 | `scripts/drift-check.mjs` + CI | de bewaker die code en bedoeling gekoppeld houdt |
 | `playbook.md` | lessen die het project gaandeweg leert |
-| `docs/WAAROM.md` | de wetenschappelijke onderbouwing achter de aanpak |
+| `docs/WHY.md` | de wetenschappelijke onderbouwing achter de aanpak |
 
-Meer weten over het waarom? Zie [`docs/WAAROM.md`](docs/WAAROM.md) — met cijfers en bronnen.
+Meer weten over het waarom? Zie [`docs/WHY.md`](docs/WHY.md) — met cijfers en bronnen.
 
 ## vibe-kit of Product Wiki?
 

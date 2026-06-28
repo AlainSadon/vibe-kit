@@ -11,4 +11,4 @@ regel zonder anker (waarschuwing), regel zonder check (waarschuwing), verweesde 
 exit-codet non-zero bij fouten, zodat hij direct als CI-poort of in een agent-loop werkt. Dit is het
 deterministische handhavingsmechanisme achter de drift-loops uit het contract.
 
-Waarom drift bewaken loont (verouderde context schaadt): zie [`docs/WAAROM.md` §2](../../docs/WAAROM.md).
+Waarom drift bewaken loont (verouderde context schaadt): zie [`docs/WHY.md` §2](../../docs/WHY.md).

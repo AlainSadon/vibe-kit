@@ -105,7 +105,7 @@ const PLAYBOOK = `# Playbook — gecureerde lessen
 
 > **Selectief toepassen.** Een groeiend playbook loont vooral bij taken met veel domeinkennis en kan
 > overbodig zijn bij taken die juist baat hebben bij beknopte instructies. Laat dit bestand leeg als
-> het project simpel is. Onderbouwing: https://github.com/AlainSadon/vibe-kit/blob/main/docs/WAAROM.md (§4).
+> het project simpel is. Onderbouwing: https://github.com/AlainSadon/vibe-kit/blob/main/docs/WHY.md (§4).
 
 ## Lessen
 
@@ -153,7 +153,7 @@ write("CHANGELOG.md", CHANGELOG);
 write("README.md", README);
 
 // 4. Verwijder kit-specifieke meta-documentatie.
-remove("docs");          // WAAROM.md gaat over vibe-kit's eigen ontwerp en linkt naar gewiste units
+remove("docs");          // WHY.md gaat over vibe-kit's eigen ontwerp en linkt naar gewiste units
 remove("CONTRIBUTING.md"); // gaat over bijdragen aan de kit, niet aan jouw project
 
 // 5. Verwijder het dogfood-anker zodat de drift-check direct schoon is.

@@ -11,4 +11,4 @@ helpen als ze mager, vers en specifiek zijn; te lang of verouderd is schadelijk.
 procedures horen daarom in de skills, die on-demand laden. Groeit het contract uit zijn jasje →
 verplaats detail naar een skill in plaats van het contract uit te breiden.
 
-Onderbouwing (cijfers + bronnen): zie [`docs/WAAROM.md` §1–2](../../docs/WAAROM.md).
+Onderbouwing (cijfers + bronnen): zie [`docs/WHY.md` §1–2](../../docs/WHY.md).
