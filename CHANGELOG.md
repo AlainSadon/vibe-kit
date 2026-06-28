@@ -13,6 +13,8 @@ Alle noemenswaardige wijzigingen aan vibe-kit. Formaat losjes gebaseerd op
   positioneringsblok. Technische installatie apart gezet.
 - README: blok "Wat de assistent bij elke wijziging nagaat" toegevoegd — de drie poorten
   (hergebruik/structuur/bewijs) in gewone taal, met verwijzing naar `AGENTS.md`.
+- README + `dec-taal-nederlands`: Nederlandstaligheid als geverifieerd onderscheid t.o.v. de
+  Engels-only bronmethode (Product Wiki) vastgelegd.
 
 ### Added
 - Eerste opzet van de kit.

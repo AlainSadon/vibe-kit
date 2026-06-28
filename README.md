@@ -120,8 +120,11 @@ dezelfde methode, maar met een ander gewicht:
 - **vibe-kit** is de lean variant voor **technische bouwers met een capabele agent**: minimale
   overhead, in een paar minuten te begrijpen en aan te passen.
 
-Kies vibe-kit als je licht en snel wilt; kies Product Wiki als je de complete, voorschrijvende aanpak
-wilt.
+Daarnaast is vibe-kit **Nederlandstalig**, terwijl Product Wiki Engels-only is — de methode zelf
+werkt in elke taal, maar de uitvoering van Product Wiki is volledig in het Engels.
+
+Kies vibe-kit als je licht en snel (en in het Nederlands) wilt; kies Product Wiki als je de complete,
+voorschrijvende aanpak wilt.
 
 ## Credit & licentie
 

@@ -10,3 +10,8 @@ het NL; dit optimaliseert voor eigen gebruik. Afweging: een Engels publiek op Li
 minder breed (overwogen: EN of tweetalig). Tweetalig is afgewezen wegens onderhoudslast en
 drift-risico tussen versies. Heroverweeg als publiek bereik prioriteit krijgt (2026-06-28, met
 gebruiker).
+
+Bonus: Nederlandstaligheid is ook een **onderscheid** t.o.v. de bronmethode. Geverifieerd op
+2026-06-28 (repo + artikel van Ismail opgehaald): Product Wiki is Engels-only — geen lokalisatie/i18n,
+en "English" wordt letterlijk bedoeld (Karpathy-kader). De methode zelf is taal-agnostisch; alleen de
+uitvoering van Ismail is volledig Engels. *(Geverifieerd via primaire bron.)*
