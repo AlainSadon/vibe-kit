@@ -21,6 +21,10 @@ Alle noemenswaardige wijzigingen aan vibe-kit. Formaat losjes gebaseerd op
 - `start-project` onboarding vereenvoudigd: een gesprek i.p.v. een multi-vraag-formulier, één
   hoofdvraag ("wat bouwen we?") plus één bevestiging (voorbeeld-inhoud opruimen); het test-commando
   wordt uitgesteld tot de eerste `run-checks`. Naar aanleiding van een vergelijking met Product Wiki.
+- `scripts/add-to-project.mjs`: non-destructieve installer om de methode aan een **bestaand** project
+  toe te voegen (kopieert alleen ontbrekende machinerie, raakt eigen bestanden niet aan). README-sectie
+  "Toevoegen aan een bestaand project" + `dec-bestaand-project-installatie`; `start-project` wijst bij
+  bestaande code naar `import-codebase`.
 
 ### Added
 - Eerste opzet van de kit.

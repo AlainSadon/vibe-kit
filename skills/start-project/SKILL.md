@@ -43,6 +43,11 @@ plus één simpele bevestiging** — niet meer.
    de `[PROJECT: …]`-placeholder bovenaan `AGENTS.md`. Dit is de intentie waar de hele methode om
    draait; verzin het niet zelf.
 
+   *Bestaat er al code* (de kit is via `add-to-project.mjs` aan een bestaand project toegevoegd, dus de
+   wiki is leeg maar er staat al broncode)? Stel dan voor om met de skill
+   [`import-codebase`](../import-codebase/SKILL.md) de wiki te bootstrappen uit die bestaande code, in
+   behapbare batches en met menselijke review.
+
 4. **Verifieer de schone start.** Draai `node scripts/drift-check.mjs` — hoort schoon te zijn (0 units,
    0 ankers in een vers project).
 

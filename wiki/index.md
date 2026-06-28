@@ -24,6 +24,7 @@ gelinkt Markdown-bestand. ID's zijn stabiel en grep-baar.
 | `dec-github-template` | Distributie via GitHub template repository | active |
 | `dec-projecten-private` | Projecten gemaakt mét de kit zijn standaard private | active |
 | `dec-onboarding-via-agent` | Onboarding via agent-interview (skill), niet via flags | active |
+| `dec-bestaand-project-installatie` | Bestaand project: non-destructieve installer `add-to-project.mjs` | active |
 
 ## Checks
 | ID | Verifieert | Status |

@@ -126,6 +126,25 @@ je je eerste vraag en begint de werkwijze hierboven.
 
 Meer weten over het waarom? Zie [`docs/WHY.md`](docs/WHY.md) — met cijfers en bronnen.
 
+## Toevoegen aan een bestaand project
+
+Heb je al een project en wil je de methode toevoegen? Dat kan **non-destructief** — je eigen README,
+code en regels blijven ongemoeid. Draai vanuit de root van je project:
+
+```sh
+npx degit AlainSadon/vibe-kit .vibe-kit-install
+node .vibe-kit-install/scripts/add-to-project.mjs          # dry-run: laat zien wat er gebeurt
+node .vibe-kit-install/scripts/add-to-project.mjs --yes    # voer de installatie uit
+```
+
+Het script kopieert alleen wat nog ontbreekt (de werkwijze, skills, de bewaker, CI, een lege wiki) en
+slaat bestaande bestanden over. Verwijder daarna de tijdelijke map (`.vibe-kit-install`). Open dan je
+AI-assistent, vul de `[PROJECT: …]`-regel in en laat hem met de skill `import-codebase` je bestaande
+code omzetten naar wiki-intentie.
+
+> ⚠️ Gebruik hiervoor **niet** `init-project.mjs` — dat is voor verse template-clones en overschrijft
+> bestanden. Voor een bestaand project is `add-to-project.mjs` de juiste, non-destructieve route.
+
 ## vibe-kit of Product Wiki?
 
 vibe-kit en Omar Ismail's [Product Wiki](https://github.com/omarismailb/product-wiki) implementeren
