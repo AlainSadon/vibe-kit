@@ -1,0 +1,2 @@
+# Normaliseer regeleindes: in de repo altijd LF, ongeacht het platform.
+* text=auto eol=lf
