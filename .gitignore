@@ -1,0 +1,25 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+build/
+out/
+coverage/
+.next/
+
+# Editor / OS
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
+
+# Logs & env
+*.log
+.env
+.env.*
+!.env.example
+
+# Werkmap voor voorstellen (optioneel; haal de regel weg als je intake/ wilt versioneren)
+# intake/

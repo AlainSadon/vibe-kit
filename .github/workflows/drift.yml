@@ -1,0 +1,21 @@
+name: drift-check
+
+# Poort: kruist de wiki-units met de PW:-ankers in de code en draait optioneel de checks.
+# Faalt de build bij verweesde ankers/checks (en bij waarschuwingen wanneer --strict aanstaat).
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  drift:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      # Zet --strict aan zodra je wilt dat "regel zonder anker/check" de build ook laat falen.
+      - name: drift-check
+        run: node scripts/drift-check.mjs
