@@ -37,6 +37,17 @@ te gaan van kwaliteit.
 Niet elke kleinigheid krijgt dit proces — een typo verbeteren gaat gewoon meteen. Het zwaardere
 overleg geldt alleen voor echte keuzes. De aanpak schaalt mee met hoe groot de wijziging is.
 
+## Wat de assistent bij elke wijziging nagaat
+
+Naast jouw "ja" loopt de assistent drie korte vragen langs — geen bureaucratie, gewoon checks die
+problemen vroeg vangen:
+
+- **Hergebruik** — bestaat dit al? Dan dat gebruiken, niet half namaken.
+- **Structuur** — past het netjes in de opzet, of moet er eerst opgeruimd worden?
+- **Bewijs** — is er een test die aantoont dat het echt klopt?
+
+(De volledige versie staat in [`AGENTS.md`](AGENTS.md).)
+
 ## Onder de motorkap (de techniek, toegankelijk)
 
 Hoe houdt vibe-kit "code" en "bedoeling" nu echt aan elkaar vast? Met drie eenvoudige bouwstenen:

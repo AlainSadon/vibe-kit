@@ -11,6 +11,8 @@ Alle noemenswaardige wijzigingen aan vibe-kit. Formaat losjes gebaseerd op
 - README herschreven voor een breder publiek: toegankelijke uitleg van probleem en aanpak, een
   "onder de motorkap"-sectie (notities, `PW:`-ankers, de bewaker) en een "vibe-kit of Product Wiki?"
   positioneringsblok. Technische installatie apart gezet.
+- README: blok "Wat de assistent bij elke wijziging nagaat" toegevoegd — de drie poorten
+  (hergebruik/structuur/bewijs) in gewone taal, met verwijzing naar `AGENTS.md`.
 
 ### Added
 - Eerste opzet van de kit.
