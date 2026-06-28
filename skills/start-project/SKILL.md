@@ -48,13 +48,24 @@ plus één simpele bevestiging** — niet meer.
    [`import-codebase`](../import-codebase/SKILL.md) de wiki te bootstrappen uit die bestaande code, in
    behapbare batches en met menselijke review.
 
-4. **Verifieer de schone start.** Draai `node scripts/drift-check.mjs` — hoort schoon te zijn (0 units,
-   0 ankers in een vers project).
+4. **Stel het testcommando voor — als het detecteerbaar is.** Net als het projectdoel is dit een
+   eenmalige projectwaarde: laat de agent het werk doen, de mens bevestigt. Kijk of de stack een
+   testcommando verraadt:
+   - `package.json` met een `"test"`-script → `npm test`
+   - `pyproject.toml` / `pytest.ini` → `pytest`
+   - `go.mod` → `go test ./...`
+   - enz.
 
-> **Het test-commando vraag je hier nog niet.** Dat zou een technische vraag aan de begroeting
-> toevoegen. De skill [`run-checks`](../run-checks/SKILL.md) stelt `CONFIG.checksCommand` in zodra je
-> de eerste check schrijft — dat is het natuurlijke moment. Biedt de gebruiker het zelf al aan? Zet het
-> dan meteen.
+   Vind je er een, **stel het ter bevestiging voor** — geen open technische vraag:
+   > "Ik zie dat je `npm test` gebruikt — zal ik dat als checks-commando instellen, zodat de
+   > drift-check je tests meedraait?"
+
+   Zet bij akkoord `CONFIG.checksCommand` in `scripts/drift-check.mjs`. Vind je niets (kaal nieuw
+   project zonder tests), **sla het over**; het wordt later gezet bij de eerste
+   [`run-checks`](../run-checks/SKILL.md), en de drift-check herinnert eraan zolang het op `null` staat.
+
+5. **Verifieer de schone start.** Draai `node scripts/drift-check.mjs` — hoort schoon te zijn (0 units,
+   0 ankers in een vers project).
 
 ## Klaar wanneer
 

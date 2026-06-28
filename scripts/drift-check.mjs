@@ -32,8 +32,16 @@ const CONFIG = {
   codeExts: [".ts", ".tsx", ".js", ".jsx", ".mjs", ".cjs", ".py", ".go", ".rs", ".java", ".rb", ".php", ".cs", ".kt", ".swift", ".css", ".scss", ".vue", ".svelte", ".sql", ".sh"],
   // Unit-types die in code verankerd én getest horen te zijn:
   anchorableTypes: ["rule", "capability"],
-  // Optioneel test-/eval-commando dat alle acceptatiecriteria verifieert (null = overslaan):
-  checksCommand: null,             // bv. "npm test --silent"
+  // Test-/eval-commando dat alle acceptatiecriteria verifieert. null = nog niet ingesteld
+  // (dan draait alleen de structurele controle, geen tests). Zet hier het testcommando van
+  // jouw stack, bijvoorbeeld:
+  //   "node --test"        (Node ingebouwde test-runner)
+  //   "npm test --silent"  (npm-script)
+  //   "pytest -q"          (Python)
+  //   "go test ./..."      (Go)
+  //   "dotnet test"        (.NET)
+  // Of laat je agent het zetten: "stel mijn checksCommand in" (skill run-checks).
+  checksCommand: null,
 };
 
 const ROOT = process.cwd();
@@ -162,11 +170,26 @@ if (CONFIG.checksCommand) {
   }
 }
 
+// ── 4b. Geen testcommando ingesteld? Maak dat zichtbaar ──────────────────────
+// Anders draaien de inhoudelijke checks stilletjes niet en lijkt alles groen.
+const hasCheckUnits = [...units.values()].some(u => u.type === "check");
+let checksNotice = null;
+if (!CONFIG.checksCommand) {
+  if (hasCheckUnits) {
+    warnings.push(`Tests niet gedraaid: er zijn check-units, maar CONFIG.checksCommand staat op null — ` +
+      `zet je testcommando (bv. "node --test") zodat de checks meedraaien.`);
+  } else {
+    checksNotice = `geen checksCommand ingesteld — alleen structurele controle, er zijn geen tests gedraaid. ` +
+      `Zet CONFIG.checksCommand (bv. "node --test", "pytest", "go test ./...") of vraag je agent (skill run-checks).`;
+  }
+}
+
 // ── 5. Rapport ───────────────────────────────────────────────────────────────
 const summary = {
   units: units.size,
   ankers: anchors.size,
   checksCommand: checksResult,
+  checksNotice,
   errors,
   warnings: STRICT ? [] : warnings,
   ...(STRICT ? { strictErrors: warnings } : {}),
@@ -177,6 +200,7 @@ if (JSON_OUT) {
 } else {
   console.log(`\n  drift-check — ${units.size} units, ${anchors.size} ankers` +
     (checksResult ? `, checks: ${checksResult}` : ""));
+  if (checksNotice) console.log(`\n  ℹ ${checksNotice}`);
   if (errors.length) {
     console.log(`\n  ✗ ${errors.length} fout(en):`);
     for (const e of errors) console.log(`    - ${e}`);

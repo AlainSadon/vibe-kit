@@ -13,6 +13,11 @@ Alle noemenswaardige wijzigingen aan vibe-kit. Formaat losjes gebaseerd op
   Gevonden bij een dogfood-test op een bestaand project.
 - `add-to-project` + README: next-steps verwoorden nu dat de agent de `[PROJECT: …]`-regel zelf invult
   via `start-project` (agent vraagt), i.p.v. de gebruiker handmatig laten editen.
+- `checksCommand` wordt nu net als het projectdoel behandeld: `start-project` (en als fallback
+  `run-checks`) **detecteert het testcommando uit de stack en stelt het ter bevestiging voor**. De
+  drift-check meldt voortaan wanneer `checksCommand` op `null` staat (een waarschuwing zodra er al
+  check-units zijn), zodat tests niet stilletjes ongedraaid blijven. `CONFIG`-comment uitgebreid met
+  stack-voorbeelden.
 - README herschreven voor een breder publiek: toegankelijke uitleg van probleem en aanpak, een
   "onder de motorkap"-sectie (notities, `PW:`-ankers, de bewaker) en een "vibe-kit of Product Wiki?"
   positioneringsblok. Technische installatie apart gezet.

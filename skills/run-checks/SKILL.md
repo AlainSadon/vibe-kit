@@ -23,9 +23,11 @@ Acceptatiecriteria zijn pas echt afdwingbaar als ze uitvoerbaar zijn.
    ```
 3. **Hergebruik de bestaande test-/eval-infrastructuur** van het project. Introduceer geen parallel
    scoringssysteem.
-4. **Koppel het testcommando** zo nodig aan de drift-check: zet `CONFIG.checksCommand` in
-   `scripts/drift-check.mjs` (bv. `"npm test --silent"`), zodat `node scripts/drift-check.mjs` de
-   checks meedraait.
+4. **Koppel het testcommando aan de drift-check** (als dat nog niet is gebeurd bij de onboarding).
+   Detecteer het commando uit de stack — `package.json` → `npm test`, `pyproject`/`pytest` → `pytest`,
+   `go.mod` → `go test ./...` — **stel het ter bevestiging voor** aan de gebruiker, en zet het dan in
+   `CONFIG.checksCommand` in `scripts/drift-check.mjs`. Zolang dit op `null` staat draait de drift-check
+   je tests niet en herinnert hij daaraan.
 5. **Draai en bevestig** dat álle criteria slagen.
 
 ## Principe
