@@ -18,6 +18,9 @@ Alle noemenswaardige wijzigingen aan vibe-kit. Formaat losjes gebaseerd op
 - README: sectie "Vereisten & compatibiliteit" toegevoegd (essentieel/optioneel + welke agents).
   Geverifieerd dat OpenAI Codex `AGENTS.md` leest; vastgelegd in `dec-agents-md-canoniek`. Toelichting
   dat Node.js alleen voor de kit-tools is, niet voor je applicatie.
+- `start-project` onboarding vereenvoudigd: een gesprek i.p.v. een multi-vraag-formulier, één
+  hoofdvraag ("wat bouwen we?") plus één bevestiging (voorbeeld-inhoud opruimen); het test-commando
+  wordt uitgesteld tot de eerste `run-checks`. Naar aanleiding van een vergelijking met Product Wiki.
 
 ### Added
 - Eerste opzet van de kit.

@@ -108,8 +108,8 @@ cd <project>
 ```
 
 Open daarna je AI-assistent (bv. Claude Code) in het project. Bij een vers project richt hij zichzelf
-in via een kort vraaggesprek: wat doet het project, mag de voorbeeld-inhoud gewist worden, en wat is
-je test-commando. Daarna stel je je eerste vraag en begint de werkwijze hierboven.
+in met een kort gesprekje: hij ruimt de voorbeeld-inhoud op en vraagt wat je gaat bouwen. Daarna stel
+je je eerste vraag en begint de werkwijze hierboven.
 
 > Liever zonder GitHub-template? `npx degit AlainSadon/vibe-kit <project>` kopieert de bestanden ook.
 
