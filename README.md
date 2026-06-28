@@ -104,7 +104,7 @@ je test-commando. Daarna stel je je eerste vraag en begint de werkwijze hierbove
 | `AGENTS.md` (+ `CLAUDE.md`) | de werkwijze die je AI-assistent automatisch leest |
 | `wiki/` | de bedoeling van je project, in gewone taal (de "notities") |
 | `skills/` | stap-voor-stap recepten voor de assistent |
-| `scripts/drift-check.mjs` + CI | de bewaker die code en bedoeling gekoppeld houdt |
+| `scripts/drift-check.mjs` + automatische controle (CI) | de bewaker die code en bedoeling gekoppeld houdt — handmatig én automatisch bij elke wijziging |
 | `playbook.md` | lessen die het project gaandeweg leert |
 | `docs/WHY.md` | de wetenschappelijke onderbouwing achter de aanpak |
 
