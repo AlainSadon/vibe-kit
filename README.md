@@ -81,14 +81,26 @@ echt?" geen mening is maar iets dat gecontroleerd wordt.
 
 ---
 
+## Vereisten & compatibiliteit
+
+**Nodig om te beginnen:**
+- Een AI-coding-agent die `AGENTS.md` leest (zie *Werkt met welke agents?* hieronder).
+- [Node.js](https://nodejs.org/) 18+ — alleen voor de twee hulpscripts van de kit (de bewaker en de
+  reset), *niet* voor je applicatie: die mag in elke taal geschreven zijn (Python, Go, C#, …).
+- Git, om je project te versioneren.
+
+**Optioneel:**
+- [`gh` (GitHub CLI)](https://cli.github.com/) — alleen voor de template-route hieronder.
+- GitHub Actions — alleen als je de bewaker ook automatisch in de cloud wilt laten draaien (de CI).
+
+**Werkt met welke agents?** `AGENTS.md` is een [open standaard](https://agents.md/) die door meerdere
+tools wordt gelezen — o.a. Claude Code, OpenAI Codex en Cursor — dus vibe-kit is niet tool-specifiek.
+`CLAUDE.md` is enkel een pointer voor Claude Code. De `skills/` laden in Claude Code automatisch
+on-demand; andere agents lezen ze als gewone gelinkte bestanden. Tot nu toe getest met Claude Code.
+
 ## Aan de slag (voor wie ermee gaat bouwen)
 
-Dit deel is technisch. Je hebt nodig: [`gh` (GitHub CLI)](https://cli.github.com/) — ingelogd via
-`gh auth login` — en [Node.js](https://nodejs.org/) 18+.
-
-> **Let op:** Node.js is alleen nodig voor de twee hulpscripts van de kit (de bewaker en de reset),
-> *niet* voor je applicatie zelf — die mag in elke taal geschreven zijn (Python, Go, C#, …). En `gh`
-> heb je enkel nodig voor de template-route hieronder.
+Dit deel is technisch.
 
 ```sh
 gh repo create <project> --template AlainSadon/vibe-kit --private --clone

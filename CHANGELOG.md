@@ -15,6 +15,9 @@ Alle noemenswaardige wijzigingen aan vibe-kit. Formaat losjes gebaseerd op
   (hergebruik/structuur/bewijs) in gewone taal, met verwijzing naar `AGENTS.md`.
 - README + `dec-taal-nederlands`: Nederlandstaligheid als geverifieerd onderscheid t.o.v. de
   Engels-only bronmethode (Product Wiki) vastgelegd.
+- README: sectie "Vereisten & compatibiliteit" toegevoegd (essentieel/optioneel + welke agents).
+  Geverifieerd dat OpenAI Codex `AGENTS.md` leest; vastgelegd in `dec-agents-md-canoniek`. Toelichting
+  dat Node.js alleen voor de kit-tools is, niet voor je applicatie.
 
 ### Added
 - Eerste opzet van de kit.
