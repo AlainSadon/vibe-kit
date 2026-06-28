@@ -18,3 +18,5 @@ Alle noemenswaardige wijzigingen aan vibe-kit. Formaat losjes gebaseerd op
 - Distributie-boilerplate: `README`, `LICENSE` (MIT + credit Omar Ismail), `CONTRIBUTING`.
 - `docs/WAAROM.md`: wetenschappelijke onderbouwing van de ontwerpkeuzes (met verificatiestatus);
   wiki-units en `playbook.md` verwijzen ernaar in plaats van de argumentatie te dupliceren.
+- `scripts/init-project.mjs`: eenmalige reset voor een vers-uit-de-template project — wist vibe-kit's
+  eigen wiki/docs, zet blanco sjablonen terug, verwijdert het dogfood-anker en ruimt zichzelf op.
