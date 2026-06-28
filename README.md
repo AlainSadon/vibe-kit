@@ -24,6 +24,7 @@ met een capabele agent.
 | Workflows | [`skills/`](skills/) | stap-voor-stap procedures die on-demand laden |
 | Lerend geheugen | [`playbook.md`](playbook.md) | gecureerde lessen (ACE-patroon) |
 | Handhaving | [`scripts/drift-check.mjs`](scripts/drift-check.mjs) + [CI](.github/workflows/drift.yml) | poorten deterministisch afdwingen |
+| Onderbouwing | [`docs/WAAROM.md`](docs/WAAROM.md) | wetenschappelijke basis achter de ontwerpkeuzes (met verificatiestatus) |
 
 Het altijd-aan contract is **bewust kort** — onderzoek wijst uit dat context-bestanden alleen helpen
 als ze mager, vers en specifiek zijn. De procedurele details staan in de skills en laden pas wanneer
@@ -62,6 +63,9 @@ Daarna:
 
 De ceremonie **schaalt mee**: triviale wijzigingen gaan gewoon door; alleen substantiële wijzigingen
 doorlopen de volledige flow. Zie [`AGENTS.md`](AGENTS.md) voor het volledige contract.
+
+Waarom deze keuzes (lean contract, drift-check, ceremonie-die-meeschaalt, playbook) onderbouwd zijn —
+inclusief de cijfers en verificatiestatus van de bronnen — staat in [`docs/WAAROM.md`](docs/WAAROM.md).
 
 ---
 

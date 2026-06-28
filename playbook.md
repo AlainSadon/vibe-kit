@@ -5,6 +5,11 @@
 > Houd het **gecureerd**: voeg toe wat generaliseert, verwijder wat achterhaald of te specifiek is.
 > Dit is geen logboek (dat is `wiki/log.md`) en geen regelset (dat is `wiki/rules/`).
 
+> **Selectief toepassen.** De ACE-auteurs vinden dat een groeiend playbook vooral loont bij taken met
+> veel domeinkennis, en **overbodig** kan zijn bij taken die juist baat hebben bij beknopte
+> instructies. Voor een bewust lean kit: voeg alleen lessen toe die echt generaliseren; laat dit
+> bestand leeg als het project simpel is. Onderbouwing: [`docs/WAAROM.md` §4](docs/WAAROM.md).
+
 ## Hoe een les toevoegen
 
 - **Eén les per bullet**, in de imperatief, met de *waarom* erbij.

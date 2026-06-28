@@ -16,3 +16,5 @@ Alle noemenswaardige wijzigingen aan vibe-kit. Formaat losjes gebaseerd op
 - `scripts/drift-check.mjs` (dependency-vrije drift-detectie) + CI-stub
   `.github/workflows/drift.yml`.
 - Distributie-boilerplate: `README`, `LICENSE` (MIT + credit Omar Ismail), `CONTRIBUTING`.
+- `docs/WAAROM.md`: wetenschappelijke onderbouwing van de ontwerpkeuzes (met verificatiestatus);
+  wiki-units en `playbook.md` verwijzen ernaar in plaats van de argumentatie te dupliceren.
