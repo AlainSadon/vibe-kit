@@ -86,6 +86,10 @@ echt?" geen mening is maar iets dat gecontroleerd wordt.
 Dit deel is technisch. Je hebt nodig: [`gh` (GitHub CLI)](https://cli.github.com/) — ingelogd via
 `gh auth login` — en [Node.js](https://nodejs.org/) 18+.
 
+> **Let op:** Node.js is alleen nodig voor de twee hulpscripts van de kit (de bewaker en de reset),
+> *niet* voor je applicatie zelf — die mag in elke taal geschreven zijn (Python, Go, C#, …). En `gh`
+> heb je enkel nodig voor de template-route hieronder.
+
 ```sh
 gh repo create <project> --template AlainSadon/vibe-kit --private --clone
 cd <project>
