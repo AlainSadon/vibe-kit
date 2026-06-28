@@ -11,6 +11,8 @@ Alle noemenswaardige wijzigingen aan vibe-kit. Formaat losjes gebaseerd op
 - `drift-check` negeert nu `.vibe-kit-install` (de tijdelijke installatiemap), zodat de meegekopieerde
   kit-scripts geen vals "verweesd anker" geven; `add-to-project` zet de opruim-stap vóór de drift-check.
   Gevonden bij een dogfood-test op een bestaand project.
+- `add-to-project` + README: next-steps verwoorden nu dat de agent de `[PROJECT: …]`-regel zelf invult
+  via `start-project` (agent vraagt), i.p.v. de gebruiker handmatig laten editen.
 - README herschreven voor een breder publiek: toegankelijke uitleg van probleem en aanpak, een
   "onder de motorkap"-sectie (notities, `PW:`-ankers, de bewaker) en een "vibe-kit of Product Wiki?"
   positioneringsblok. Technische installatie apart gezet.

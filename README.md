@@ -139,8 +139,8 @@ node .vibe-kit-install/scripts/add-to-project.mjs --yes    # voer de installatie
 
 Het script kopieert alleen wat nog ontbreekt (de werkwijze, skills, de bewaker, CI, een lege wiki) en
 slaat bestaande bestanden over. Verwijder daarna de tijdelijke map (`.vibe-kit-install`). Open dan je
-AI-assistent, vul de `[PROJECT: …]`-regel in en laat hem met de skill `import-codebase` je bestaande
-code omzetten naar wiki-intentie.
+AI-assistent: hij vraagt wat je bouwt en vult `AGENTS.md` zelf in (skill `start-project`), en stelt
+voor om met `import-codebase` je bestaande code naar wiki-intentie om te zetten.
 
 > ⚠️ Gebruik hiervoor **niet** `init-project.mjs` — dat is voor verse template-clones en overschrijft
 > bestanden. Voor een bestaand project is `add-to-project.mjs` de juiste, non-destructieve route.

@@ -163,9 +163,10 @@ if (!APPLY) {
     console.log("    ! Je had al een AGENTS.md — die is NIET aangeraakt. Voeg de vibe-kit-werkwijze");
     console.log("      handmatig toe (zie de AGENTS.md in deze kit als voorbeeld).");
   }
-  console.log("    1. Open je AI-assistent in dit project en vul de [PROJECT: …]-regel in AGENTS.md in.");
-  console.log("    2. Laat de assistent met de skill 'import-codebase' je bestaande code omzetten");
-  console.log("       naar wiki-intentie (in behapbare batches, met jouw review).");
+  console.log("    1. Open je AI-assistent in dit project — hij vraagt wat je bouwt en vult de");
+  console.log("       [PROJECT: …]-regel in AGENTS.md zelf in (skill start-project).");
+  console.log("    2. Laat de assistent met 'import-codebase' je bestaande code omzetten naar");
+  console.log("       wiki-intentie (in behapbare batches, met jouw review).");
   console.log("    3. Verwijder de tijdelijke installatiemap (bv. .vibe-kit-install).");
   console.log("    4. Controleer: node scripts/drift-check.mjs   (hoort schoon te zijn).\n");
 }
