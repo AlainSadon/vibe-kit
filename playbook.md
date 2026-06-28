@@ -18,9 +18,8 @@
 
 ## Lessen
 
-<!-- Voorbeeld (verwijder bij eerste echte les):
-- Roep gedeelde validatie altijd via `cap-input-validatie` aan i.p.v. inline checks — voorkomt
-  herimplementatie-drift die de drift-check pas laat vangt. (poort: reuse)
--->
-
-_Nog geen lessen vastgelegd._
+- **Stel vragen aan de mens in mensentaal, zonder interne unit-id's of jargon.** Bij onboarding/
+  bevestiging zag een tester "reset draaien? de wiki bevat nog `dec-naam-vibe-kit`" — verwarrend,
+  want die id zegt een gebruiker niets. Beschrijf het effect ("de voorbeeld-inhoud wissen en met een
+  schone lei beginnen"), niet de implementatie. Geldt voor elke skill die de mens iets vraagt.
+  (gevonden tijdens dogfood-test van [`start-project`](skills/start-project/SKILL.md))

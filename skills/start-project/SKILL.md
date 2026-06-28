@@ -20,13 +20,21 @@ zélf** (de kit-repo)? Dan is de placeholder bewust leeg en is onboarding niet v
 1. **Vraag het projectdoel.** "Wat doet dit project, en voor wie?" → vul het antwoord in de
    `[PROJECT: …]`-placeholder bovenaan `AGENTS.md`. Dit is de intentie waar de hele methode om draait;
    verzin het niet zelf.
-2. **Vraag of dit een verse template-clone is.** Zo ja én de wiki bevat nog vibe-kit's eigen units
-   (bv. `dec-naam-vibe-kit` bestaat): draai de reset naar een blanco intentie-laag —
+2. **Vraag of dit een verse template-clone is.** Detecteer het zelf: bestaat de wiki nog uit vibe-kit's
+   eigen units (bv. `wiki/decisions/naam-vibe-kit.md`)? Zo ja, vraag toestemming om te resetten en
+   draai dan:
    ```
    node scripts/init-project.mjs --yes
    ```
    Dit wist de meta-inhoud, zet blanco sjablonen terug, verwijdert het dogfood-anker en ruimt zichzelf
-   op. Bevestig kort wat er gebeurt vóór je het draait.
+   op.
+
+   **Formuleer de vraag in mensentaal, zonder unit-id's of kit-jargon.** De gebruiker kent
+   `dec-naam-vibe-kit` niet. Bijvoorbeeld:
+   > "Deze map bevat nog de voorbeeld-inhoud van vibe-kit zelf. Wil je die wissen en met een schone lei
+   > aan je eigen project beginnen?"
+
+   Niet: "De wiki bevat nog vibe-kit's eigen decisions zoals naam-vibe-kit — reset draaien?"
 3. **Vraag het test-/checks-commando.** "Welk commando draait je tests/acceptatiecriteria (bv.
    `node --test`, `pytest`, `go test ./...`)?" → zet `CONFIG.checksCommand` in
    `scripts/drift-check.mjs`. Weet de gebruiker het nog niet? Laat het op `null` en stel het in bij de

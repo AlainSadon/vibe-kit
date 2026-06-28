@@ -5,6 +5,10 @@ Alle noemenswaardige wijzigingen aan vibe-kit. Formaat losjes gebaseerd op
 
 ## [Unreleased]
 
+### Changed
+- `start-project` stelt de reset-vraag nu in mensentaal (geen interne unit-id's) — gevonden tijdens
+  een dogfood-test. Eerste les vastgelegd in `playbook.md`.
+
 ### Added
 - Eerste opzet van de kit.
 - Altijd-aan contract `AGENTS.md` (intentie-gedreven werkwijze, ceremonie die meeschaalt, drie
