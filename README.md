@@ -1,85 +1,118 @@
 # vibe-kit
 
-> **Een starter-kit voor intentie-gedreven bouwen.** Drop hem in een nieuw project en elke
-> coding-agent werkt automatisch volgens een gestructureerde werkwijze — zodat snel AI-gestuurd
-> bouwen ("vibe coding") niet ontaardt in drift, duplicatie en brosse architectuur.
+> **AI laat je razendsnel software bouwen — maar vergeet onderweg waaróm je keuzes maakte.**
+> Daardoor worden projecten al snel rommelig: dubbel werk, wankele structuur, dingen die elkaar
+> breken. vibe-kit lost dat op door de bedoeling achter je project op te schrijven én je AI-assistent
+> te laten overleggen vóórdat hij begint te bouwen.
 
-vibe-kit maakt **productintentie** een duurzaam, gedeeld artefact en zet er een paar lichte poorten
-omheen: de mens keurt de bedoeling goed **vóór** de agent code schrijft. Het is een *contract +
-poorten*, geen belofte dat Engels magisch naar code compileert.
+## Het probleem, kort
 
-De methode is afgeleid van Omar Ismail's [*Making English a Programming
-Language*](https://github.com/omarismailb/product-wiki) (MIT) — afgeslankt voor technische bouwers
-met een capabele agent.
+Werken met een AI-assistent ("vibe coding") voelt als toveren: je vraagt iets, en er rolt code uit.
+Maar code legt alleen vast *hoe* iets werkt, niet *waarom* het zo gekozen is. Bij elke volgende vraag
+raadt de AI opnieuw, en zonder geheugen van eerdere beslissingen gaat het langzaam mis — net als een
+verbouwing zonder bouwtekening.
+
+## Wat vibe-kit doet
+
+vibe-kit voegt drie simpele gewoontes toe aan het samenwerken met een AI-assistent:
+
+1. **De bedoeling wordt opgeschreven.** Naast de code houdt het project een laag in gewone taal bij:
+   wat moet er gebeuren, en waarom. Dat is het blijvende geheugen van het project.
+2. **De AI stelt eerst een plan voor.** Bij iets nieuws schrijft de assistent eerst een voorstel in
+   gewone taal — wat hij gaat doen en waarom — en wacht op jouw "ja" vóór hij code schrijft.
+3. **Code en bedoeling blijven gekoppeld.** Een ingebouwde controle bewaakt dat de code niet stilletjes
+   wegdrijft van wat er bedoeld was.
+
+Het resultaat: je houdt de regie, het project blijft begrijpelijk, en snelheid hoeft niet ten koste
+te gaan van kwaliteit.
+
+## Hoe het in de praktijk voelt
+
+> Jij: *"Ik wil dat klanten kunnen betalen met iDEAL."*
+> De assistent: *"Voorstel: ik voeg een betaal-stap toe die… Het is klaar als… Buiten scope is…
+> Akkoord?"*
+> Jij: *"Ja, ga verder."*
+> De assistent bouwt het, schrijft een testje dat bewijst dat het werkt, en noteert de beslissing.
+
+Niet elke kleinigheid krijgt dit proces — een typo verbeteren gaat gewoon meteen. Het zwaardere
+overleg geldt alleen voor echte keuzes. De aanpak schaalt mee met hoe groot de wijziging is.
+
+## Onder de motorkap (de techniek, toegankelijk)
+
+Hoe houdt vibe-kit "code" en "bedoeling" nu echt aan elkaar vast? Met drie eenvoudige bouwstenen:
+
+**1. Notities met een naam.** Elke brok bedoeling is een kort notitietje in de map `wiki/`, met een
+vaste, korte code-naam. Bijvoorbeeld een regel `rule-afronding`: *"bedragen afronden op halve centen,
+omdat…"*.
+
+**2. Ankers in de code — het scharnierpunt.** Waar de code zo'n notitie waarmaakt, zet de assistent
+een klein labeltje erbij dat terugverwijst: een **`PW:`-anker** (PW staat voor *Product Wiki*).
+
+```js
+// PW: rule-afronding — bedragen afronden op halve centen
+function rondAf(bedrag) { ... }
+```
+
+Dit ankertje is de lijm tussen *hoe* (de code) en *waarom* (de notitie). Met één zoekopdracht spring
+je van een bedoeling naar alle code die haar uitvoert — en andersom. Zo raakt nooit zoek welke code
+welke beslissing dient.
+
+**3. De bewaker.** Een klein script (`drift-check`) leest alle ankers en alle notities en legt ze
+naast elkaar. Wijst een anker naar een notitie die niet (meer) bestaat? Is er een regel zonder bewijs
+dat hij werkt? Dan slaat het alarm — meteen, niet pas maanden later. Deze controle kun je ook
+automatisch laten draaien bij elke wijziging.
+
+En "het is klaar als…" uit een voorstel wordt telkens een **automatische test**, zodat "werkt het
+echt?" geen mening is maar iets dat gecontroleerd wordt.
+
+> Kort samengevat: **bedoeling (`wiki/`) ⇄ anker (`PW:`) ⇄ code**, met de bewaker eromheen die ze
+> gekoppeld houdt.
 
 ---
 
-## Wat zit erin
+## Aan de slag (voor wie ermee gaat bouwen)
 
-| Laag | Artefact | Rol |
-|---|---|---|
-| Altijd-aan contract | [`AGENTS.md`](AGENTS.md) | korte, leesbare werkwijze die elke agent automatisch leest |
-| Tool-pointer | [`CLAUDE.md`](CLAUDE.md) | verwijst Claude Code naar `AGENTS.md` |
-| Bron van waarheid | [`wiki/`](wiki/) | intentie-units (rules, capabilities, decisions, checks) |
-| Workflows | [`skills/`](skills/) | stap-voor-stap procedures die on-demand laden |
-| Lerend geheugen | [`playbook.md`](playbook.md) | gecureerde lessen (ACE-patroon) |
-| Handhaving | [`scripts/drift-check.mjs`](scripts/drift-check.mjs) + [CI](.github/workflows/drift.yml) | poorten deterministisch afdwingen |
-| Onderbouwing | [`docs/WAAROM.md`](docs/WAAROM.md) | wetenschappelijke basis achter de ontwerpkeuzes (met verificatiestatus) |
-
-Het altijd-aan contract is **bewust kort** — onderzoek wijst uit dat context-bestanden alleen helpen
-als ze mager, vers en specifiek zijn. De procedurele details staan in de skills en laden pas wanneer
-ze nodig zijn.
-
----
-
-## Snelstart (nieuw project mét de kit)
-
-Eenmalig: [`gh` CLI](https://cli.github.com/) geïnstalleerd + `gh auth login`. Markeer deze repo op
-GitHub als **template repository** (Settings → Template repository).
+Dit deel is technisch. Je hebt nodig: [`gh` (GitHub CLI)](https://cli.github.com/) — ingelogd via
+`gh auth login` — en [Node.js](https://nodejs.org/) 18+.
 
 ```sh
-gh repo create <project> --template <jouw-username>/vibe-kit --private --clone
+gh repo create <project> --template AlainSadon/vibe-kit --private --clone
 cd <project>
 ```
 
-Daarna:
-1. **Open de agent in het project** (bv. `claude`). Bij een verse template-clone start hij
-   automatisch de **onboarding** (skill [`start-project`](skills/start-project/SKILL.md)): hij vraagt
-   wat het project doet (→ vult `AGENTS.md` in), draait de reset naar een blanco intentie-laag, en zet
-   je test-/checks-commando. Geen handmatig editen nodig.
-2. Stel je eerste substantiële vraag aan de agent → die maakt `wiki/` aan en schrijft een
-   **voorstel** in gewone taal.
-3. Jij keurt het voorstel goed (of stuurt bij) → de agent compileert naar code met checks en
-   `PW:`-ankers.
-4. Periodiek: laat de agent de drift-loops draaien (`node scripts/drift-check.mjs`).
+Open daarna je AI-assistent (bv. Claude Code) in het project. Bij een vers project richt hij zichzelf
+in via een kort vraaggesprek: wat doet het project, mag de voorbeeld-inhoud gewist worden, en wat is
+je test-commando. Daarna stel je je eerste vraag en begint de werkwijze hierboven.
 
-> Liever handmatig resetten? `node scripts/init-project.mjs` (dry-run) toont wat er gebeurt;
-> `--yes` voert het uit.
+> Liever zonder GitHub-template? `npx degit AlainSadon/vibe-kit <project>` kopieert de bestanden ook.
 
-> Liever geen GitHub-template? `npx degit <username>/vibe-kit <project>` kopieert de bestanden ook,
-> maar zonder automatische repo-koppeling.
+### Wat zit erin
 
----
+| Onderdeel | Waarvoor |
+|---|---|
+| `AGENTS.md` (+ `CLAUDE.md`) | de werkwijze die je AI-assistent automatisch leest |
+| `wiki/` | de bedoeling van je project, in gewone taal (de "notities") |
+| `skills/` | stap-voor-stap recepten voor de assistent |
+| `scripts/drift-check.mjs` + CI | de bewaker die code en bedoeling gekoppeld houdt |
+| `playbook.md` | lessen die het project gaandeweg leert |
+| `docs/WAAROM.md` | de wetenschappelijke onderbouwing achter de aanpak |
 
-## De methode in één minuut
+Meer weten over het waarom? Zie [`docs/WAAROM.md`](docs/WAAROM.md) — met cijfers en bronnen.
 
-1. **Intentie is duurzaam; code is de afgeleide.** De `wiki/` zegt *wat* en *waarom*; code is *hoe*.
-2. **Beslis *wát* vóór *welke files*.** Eerst de bedoeling, dan pas de code.
-3. **De mens keurt intentie goed vóór code.** Niet-triviale wijzigingen worden eerst een voorstel.
+## vibe-kit of Product Wiki?
 
-De ceremonie **schaalt mee**: triviale wijzigingen gaan gewoon door; alleen substantiële wijzigingen
-doorlopen de volledige flow. Zie [`AGENTS.md`](AGENTS.md) voor het volledige contract.
+vibe-kit en Omar Ismail's [Product Wiki](https://github.com/omarismailb/product-wiki) implementeren
+dezelfde methode, maar met een ander gewicht:
 
-Waarom deze keuzes (lean contract, drift-check, ceremonie-die-meeschaalt, playbook) onderbouwd zijn —
-inclusief de cijfers en verificatiestatus van de bronnen — staat in [`docs/WAAROM.md`](docs/WAAROM.md).
+- **Product Wiki** is de vollediger, dwingender variant — rijkere structuur en tooling die de poorten
+  afdwingt. Sterk wanneer ook een minder technisch team meedoet of bij product-/UX-zwaar werk.
+- **vibe-kit** is de lean variant voor **technische bouwers met een capabele agent**: minimale
+  overhead, in een paar minuten te begrijpen en aan te passen.
 
----
-
-## Dogfooding
-
-Deze repo gebruikt zijn eigen methode: zie [`wiki/`](wiki/) voor de intentie-units van vibe-kit zelf.
+Kies vibe-kit als je licht en snel wilt; kies Product Wiki als je de complete, voorschrijvende aanpak
+wilt.
 
 ## Credit & licentie
 
-Methode afgeleid van [Omar Ismail — Product Wiki](https://github.com/omarismailb/product-wiki) (MIT).
-Deze kit valt onder de [MIT-licentie](LICENSE).
+De methode is afgeleid van [Omar Ismail — Product Wiki](https://github.com/omarismailb/product-wiki)
+(MIT). vibe-kit valt onder de [MIT-licentie](LICENSE).

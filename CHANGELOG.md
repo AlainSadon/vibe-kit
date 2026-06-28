@@ -8,6 +8,9 @@ Alle noemenswaardige wijzigingen aan vibe-kit. Formaat losjes gebaseerd op
 ### Changed
 - `start-project` stelt de reset-vraag nu in mensentaal (geen interne unit-id's) — gevonden tijdens
   een dogfood-test. Eerste les vastgelegd in `playbook.md`.
+- README herschreven voor een breder publiek: toegankelijke uitleg van probleem en aanpak, een
+  "onder de motorkap"-sectie (notities, `PW:`-ankers, de bewaker) en een "vibe-kit of Product Wiki?"
+  positioneringsblok. Technische installatie apart gezet.
 
 ### Added
 - Eerste opzet van de kit.
