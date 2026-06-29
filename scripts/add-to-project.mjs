@@ -1,15 +1,26 @@
 #!/usr/bin/env node
-// add-to-project.mjs — voeg de vibe-kit-machinerie NON-DESTRUCTIEF toe aan een BESTAAND project.
+// add-to-project.mjs — voeg de vibe-kit-machinerie NON-DESTRUCTIEF toe aan een BESTAAND project,
+// of UPGRADE de machinerie van een project dat de kit al heeft.
 //
-// Anders dan init-project.mjs (dat een verse template-clone reset en bestanden overschrijft), raakt
-// dit script nooit bestaande bestanden aan: het kopieert alleen wat nog ontbreekt en zet een lege
-// wiki-structuur klaar. Je eigen README, CHANGELOG, code en regels blijven ongemoeid.
+// Twee modi:
+//
+//   (standaard) INSTALLEREN — kopieert alleen wat nog ontbreekt en zet een lege wiki-structuur klaar.
+//               Raakt nooit bestaande bestanden aan. Je eigen README, CHANGELOG, code en regels blijven
+//               ongemoeid. (Anders dan init-project.mjs, dat een verse template-clone reset.)
+//
+//   --upgrade   MOTOR VERVERSEN — werkt alleen de "motor"-bestanden bij (drift-check.mjs + skills) naar
+//               deze kit-versie. Laat je INHOUD en INSTELLINGEN met rust: vibe-kit.config.mjs, wiki/,
+//               playbook.md, CLAUDE.md, README, CHANGELOG worden nooit aangeraakt. AGENTS.md en de
+//               CI-workflow worden alleen gemeld als ze afwijken (jij voegt veranderingen zelf samen),
+//               want die pas je doorgaans zelf aan.
 //
 // Gebruik vanuit de root van je bestaande project:
 //
 //     npx degit AlainSadon/vibe-kit .vibe-kit-install
-//     node .vibe-kit-install/scripts/add-to-project.mjs            # DRY-RUN: toon wat er gebeurt
-//     node .vibe-kit-install/scripts/add-to-project.mjs --yes      # voer de installatie uit
+//     node .vibe-kit-install/scripts/add-to-project.mjs                      # DRY-RUN installeren
+//     node .vibe-kit-install/scripts/add-to-project.mjs --yes                # installeren
+//     node .vibe-kit-install/scripts/add-to-project.mjs --upgrade            # DRY-RUN upgraden
+//     node .vibe-kit-install/scripts/add-to-project.mjs --upgrade --yes      # upgraden
 //     (verwijder daarna .vibe-kit-install)
 //
 // Geen dependencies. Pure Node (>=18, ESM).
@@ -21,7 +32,9 @@ import { fileURLToPath } from "node:url";
 const SCRIPT_DIR = dirname(fileURLToPath(import.meta.url));
 const KIT_ROOT = resolve(SCRIPT_DIR, "..");   // de uitgecheckte kit (bv. .vibe-kit-install)
 const TARGET = process.cwd();                  // jouw bestaande project
-const APPLY = process.argv.slice(2).includes("--yes");
+const ARGV = process.argv.slice(2);
+const APPLY = ARGV.includes("--yes");
+const UPGRADE = ARGV.includes("--upgrade");
 const actions = [];
 const log = (m) => actions.push(m);
 
@@ -110,6 +123,73 @@ const PLAYBOOK = `# Playbook — gecureerde lessen
 
 _Nog geen lessen vastgelegd._
 `;
+
+// ── Upgrade-modus: ververs alleen de motor, laat inhoud + instellingen met rust ──
+const DOGFOOD_RE = /^.*PW:\s*cap-drift-detectie.*\r?\n/m;
+const readOrNull = (abs) => { try { return readFileSync(abs, "utf8"); } catch { return null; } };
+
+function refreshFile(rel, transform = (s) => s) {
+  // Motor-bestand: overschrijf met de kit-versie (na optionele transform).
+  const src = join(KIT_ROOT, rel);
+  if (!existsSync(src)) return;
+  const incoming = transform(readFileSync(src, "utf8"));
+  const existing = readOrNull(join(TARGET, rel));
+  if (existing === incoming) { log(`ongewijzigd  ${rel}`); return; }
+  log(`${existing === null ? "nieuw       " : "bijwerken   "}${rel}`);
+  if (APPLY) { ensureDir(dirname(join(TARGET, rel))); writeFileSync(join(TARGET, rel), incoming); }
+}
+
+function refreshDir(rel, transform) {
+  const srcDir = join(KIT_ROOT, rel);
+  if (!existsSync(srcDir)) return;
+  for (const name of readdirSync(srcDir)) {
+    const childRel = `${rel}/${name}`;
+    if (statSync(join(srcDir, name)).isDirectory()) refreshDir(childRel, transform);
+    else refreshFile(childRel, transform);
+  }
+}
+
+function reviewFile(rel) {
+  // Motor-achtig, maar doorgaans door jou aangepast: kopieer als afwezig, anders alleen MELDEN.
+  const src = join(KIT_ROOT, rel);
+  if (!existsSync(src)) return;
+  const incoming = readFileSync(src, "utf8");
+  const existing = readOrNull(join(TARGET, rel));
+  if (existing === null) {
+    log(`nieuw       ${rel}`);
+    if (APPLY) { ensureDir(dirname(join(TARGET, rel))); writeFileSync(join(TARGET, rel), incoming); }
+  } else if (existing === incoming) {
+    log(`ongewijzigd  ${rel}`);
+  } else {
+    log(`! controleer ${rel} (kit-versie wijkt af; NIET overschreven, voeg wijzigingen zelf samen)`);
+  }
+}
+
+if (UPGRADE) {
+  console.log(APPLY ? "\n  add-to-project --upgrade — MOTOR VERVERSEN\n"
+                    : "\n  add-to-project --upgrade — DRY-RUN (voeg --yes toe om uit te voeren)\n");
+
+  // Verversen (motor, veilig te overschrijven):
+  refreshFile("scripts/drift-check.mjs", (s) => s.replace(DOGFOOD_RE, ""));  // strip dogfood-anker
+  refreshDir("skills");
+
+  // Melden (vaak zelf aangepast, dus niet automatisch overschrijven):
+  reviewFile("AGENTS.md");
+  reviewFile(".github/workflows/drift.yml");
+
+  for (const a of actions) console.log("    " + a);
+  console.log(`\n  ${actions.length} actie(s).`);
+  if (!APPLY) {
+    console.log("\n  Dit was een dry-run. Voer uit met:  node <pad>/add-to-project.mjs --upgrade --yes\n");
+  } else {
+    console.log("\n  Klaar. Niet aangeraakt: vibe-kit.config.mjs, wiki/, playbook.md, CLAUDE.md, README, CHANGELOG.");
+    console.log("  Tips:");
+    console.log("    - Bekijk de wijzigingen met:  git diff");
+    console.log("    - Lees de CHANGELOG van de kit voor wat je mogelijk handmatig moet overnemen.");
+    console.log("    - Controleer:  node scripts/drift-check.mjs   (hoort schoon te zijn).\n");
+  }
+  process.exit(0);
+}
 
 // ── Installatie ──────────────────────────────────────────────────────────────
 console.log(APPLY ? "\n  add-to-project — INSTALLEREN\n" : "\n  add-to-project — DRY-RUN (voeg --yes toe om uit te voeren)\n");

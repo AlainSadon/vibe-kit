@@ -14,6 +14,10 @@ Alle noemenswaardige wijzigingen aan vibe-kit. Formaat losjes gebaseerd op
   `anchorableTypes` en de hooks) staan nu in een apart config-bestand i.p.v. in `scripts/drift-check.mjs`.
   Zo overschrijft een upgrade van het script je instellingen niet. Het script houdt interne defaults en
   merget de config eroverheen (ontbrekend bestand/sleutel valt terug op de default). `dec-config-bestand`.
+- `add-to-project.mjs --upgrade`: werkt de kit van een bestaand project bij. Ververst alleen de motor
+  (`scripts/drift-check.mjs` + `skills/`) en laat inhoud + instellingen met rust (`vibe-kit.config.mjs`,
+  `wiki/`, `playbook.md`, `CLAUDE.md`, README, CHANGELOG). `AGENTS.md` en de CI-workflow worden alleen
+  gemeld als ze afwijken (handmatig samenvoegen). Dry-run by default; `--upgrade --yes` om uit te voeren.
 
 ### Changed
 - `start-project` stelt de reset-vraag nu in mensentaal (geen interne unit-id's) — gevonden tijdens

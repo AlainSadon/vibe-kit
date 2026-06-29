@@ -167,6 +167,21 @@ voor om met `import-codebase` je bestaande code naar wiki-intentie om te zetten.
 > ⚠️ Gebruik hiervoor **niet** `init-project.mjs` — dat is voor verse template-clones en overschrijft
 > bestanden. Voor een bestaand project is `add-to-project.mjs` de juiste, non-destructieve route.
 
+### De kit updaten
+
+Komt er een nieuwe versie van vibe-kit uit? Werk dan alleen de "motor" bij, met dezelfde installer:
+
+```sh
+npx degit AlainSadon/vibe-kit .vibe-kit-install
+node .vibe-kit-install/scripts/add-to-project.mjs --upgrade          # dry-run: laat zien wat er verandert
+node .vibe-kit-install/scripts/add-to-project.mjs --upgrade --yes    # voer de update uit
+```
+
+De update ververst alleen de bewaker (`scripts/drift-check.mjs`) en de `skills/`. Je **instellingen en
+inhoud blijven ongemoeid**: `vibe-kit.config.mjs`, je `wiki/`, `playbook.md`, `CLAUDE.md`, README en
+CHANGELOG worden niet aangeraakt. `AGENTS.md` en de CI-workflow worden alleen *gemeld* als ze afwijken
+(die pas je doorgaans zelf aan, dus die voeg je handmatig samen). Bekijk daarna gerust `git diff`.
+
 ## vibe-kit of Product Wiki?
 
 vibe-kit en Omar Ismail's [Product Wiki](https://github.com/omarismailb/product-wiki) implementeren
