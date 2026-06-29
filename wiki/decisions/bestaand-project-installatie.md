@@ -27,4 +27,7 @@ upgrade **ververst alleen de motor** (`scripts/drift-check.mjs`, met opnieuw ges
 `CLAUDE.md`, `README`, `CHANGELOG`). `AGENTS.md` en de CI-workflow worden alleen *gemeld* als ze
 afwijken, niet overschreven, omdat de gebruiker die doorgaans zelf aanpast (handmatig samenvoegen).
 Zonder die scheiding zou een upgrade de hooks en eigen instellingen wissen. Dry-run by default,
-`--upgrade --yes` om uit te voeren (2026-06-29, met gebruiker).
+`--upgrade --yes` om uit te voeren. De skill `upgrade-kit` maakt deze route **agent-aanroepbaar**: ze
+staat in de skills-tabel van `AGENTS.md`, zodat de assistent het commando kent zodra de gebruiker vraagt
+de kit te upgraden (anders zou hij het exacte commando moeten raden; de README reist niet mee naar een
+consumer-project) (2026-06-29, met gebruiker).

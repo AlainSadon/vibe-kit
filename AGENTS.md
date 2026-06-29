@@ -89,3 +89,4 @@ units; forceer geen volledige wiki vooraf. Zie [`wiki/index.md`](wiki/index.md).
 | [`run-checks`](skills/run-checks/SKILL.md) | acceptatiecriteria als uitvoerbare checks draaien |
 | [`review-diff`](skills/review-diff/SKILL.md) | een diff toetsen aan de drie poorten |
 | [`import-codebase`](skills/import-codebase/SKILL.md) | bestaande code reverse-importeren naar de wiki |
+| [`upgrade-kit`](skills/upgrade-kit/SKILL.md) | de kit-machinerie bijwerken naar een nieuwere versie (alleen de motor) |

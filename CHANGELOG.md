@@ -18,6 +18,8 @@ Alle noemenswaardige wijzigingen aan vibe-kit. Formaat losjes gebaseerd op
   (`scripts/drift-check.mjs` + `skills/`) en laat inhoud + instellingen met rust (`vibe-kit.config.mjs`,
   `wiki/`, `playbook.md`, `CLAUDE.md`, README, CHANGELOG). `AGENTS.md` en de CI-workflow worden alleen
   gemeld als ze afwijken (handmatig samenvoegen). Dry-run by default; `--upgrade --yes` om uit te voeren.
+- Skill `upgrade-kit` + regel in de skills-tabel van `AGENTS.md`: maakt de upgrade-route
+  agent-aanroepbaar, zodat je de assistent simpelweg kunt vragen de kit te upgraden.
 
 ### Changed
 - `start-project` stelt de reset-vraag nu in mensentaal (geen interne unit-id's) — gevonden tijdens
