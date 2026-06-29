@@ -64,6 +64,13 @@ plus één simpele bevestiging** — niet meer.
    project zonder tests), **sla het over**; het wordt later gezet bij de eerste
    [`run-checks`](../run-checks/SKILL.md), en de drift-check herinnert eraan zolang het op `null` staat.
 
+   De drift-check kent op dezelfde manier twee optionele hooks die je hier mág voorstellen, maar **maak
+   er geen formulier van**: een `qualityCommand` (lint, bv. `ruff check .`) en een `securityCommand`
+   (kwetsbaarheden, geef voorkeur aan toolchain-eigen tools als `npm audit` of `pip-audit`). Beide staan
+   default `null` en zijn bewust opt-in. Houd onboarding licht: stel hooguit één hook extra voor als de
+   tool duidelijk al aanwezig is, en laat de rest over aan [`run-checks`](../run-checks/SKILL.md). Zie
+   [`dec-quality-security-hooks`](../../wiki/decisions/quality-security-hooks.md).
+
 5. **Verifieer de schone start.** Draai `node scripts/drift-check.mjs` — hoort schoon te zijn (0 units,
    0 ankers in een vers project).
 

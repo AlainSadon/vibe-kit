@@ -16,7 +16,8 @@
 //   2. Regel zonder anker  — actieve rule/capability die nergens in code verankerd is    -> waarschuwing
 //   3. Regel zonder check  — actieve rule/capability waar geen check-unit naar linkt      -> waarschuwing
 //   4. Verweesde check     — check-unit die naar een niet-bestaande ID linkt              -> FOUT
-//   5. Checks-commando      — optioneel: draait je test-/eval-commando (CONFIG.checksCommand)
+//   5. Command-hooks        — optioneel: draait je test-, quality- en security-commando
+//                            (CONFIG.checksCommand / qualityCommand / securityCommand)
 
 // PW: cap-drift-detectie — dit script realiseert de drift-detectie, zie wiki/capabilities/drift-detectie.md
 import { readFileSync, readdirSync, statSync } from "node:fs";
@@ -32,16 +33,33 @@ const CONFIG = {
   codeExts: [".ts", ".tsx", ".js", ".jsx", ".mjs", ".cjs", ".py", ".go", ".rs", ".java", ".rb", ".php", ".cs", ".kt", ".swift", ".css", ".scss", ".vue", ".svelte", ".sql", ".sh"],
   // Unit-types die in code verankerd én getest horen te zijn:
   anchorableTypes: ["rule", "capability"],
-  // Test-/eval-commando dat alle acceptatiecriteria verifieert. null = nog niet ingesteld
-  // (dan draait alleen de structurele controle, geen tests). Zet hier het testcommando van
-  // jouw stack, bijvoorbeeld:
+  // ── Command-hooks (alle drie optioneel, null = uit) ───────────────────────
+  // Elke hook draait een commando van JOUW project; de kit levert geen scanners zelf
+  // en blijft zo dependency-vrij en stack-agnostisch. null = niet ingesteld → die hook
+  // draait niet. Je agent detecteert en stelt ze voor, net als het projectdoel
+  // (skills start-project / run-checks). Zie wiki/decisions/quality-security-hooks.md.
+  //
+  // 1. Test-/eval-commando dat alle acceptatiecriteria verifieert. Bijvoorbeeld:
   //   "node --test"        (Node ingebouwde test-runner)
   //   "npm test --silent"  (npm-script)
   //   "pytest -q"          (Python)
   //   "go test ./..."      (Go)
   //   "dotnet test"        (.NET)
-  // Of laat je agent het zetten: "stel mijn checksCommand in" (skill run-checks).
   checksCommand: null,
+  // 2. Kwaliteits-/lint-commando (complexiteit, duplicatie, stijl). Bijvoorbeeld:
+  //   "npm run lint"       (ESLint e.d.)
+  //   "ruff check ."       (Python)
+  //   "golangci-lint run"  (Go)
+  //   "dotnet format --verify-no-changes"  (.NET)
+  qualityCommand: null,
+  // 3. Security-commando (kwetsbaarheden, secrets, kwetsbare dependencies). Geef de
+  //    voorkeur aan tooling die al in je toolchain zit (geen extra install):
+  //   "npm audit --audit-level=high"          (JS — ingebouwd)
+  //   "pip-audit"                              (Python)
+  //   "govulncheck ./..."                      (Go)
+  //   "dotnet list package --vulnerable"       (.NET — ingebouwd)
+  //   "cargo audit"                            (Rust) · "gitleaks detect" (secrets, elke taal)
+  securityCommand: null,
 };
 
 const ROOT = process.cwd();
@@ -158,20 +176,30 @@ for (const u of units.values()) {
   }
 }
 
-// ── 4. Optioneel: draai het acceptatie-checks-commando ───────────────────────
-let checksResult = null;
-if (CONFIG.checksCommand) {
+// ── 4. Optioneel: draai de command-hooks (checks / quality / security) ───────
+// Alle drie draaien het commando van jóúw project; null = uit. Elke faler is een fout.
+const HOOKS = [
+  { label: "checks",   command: CONFIG.checksCommand },
+  { label: "quality",  command: CONFIG.qualityCommand },
+  { label: "security", command: CONFIG.securityCommand },
+];
+const hookResults = {};                      // label -> "pass" | "fail"
+for (const { label, command } of HOOKS) {
+  if (!command) continue;
   try {
-    execSync(CONFIG.checksCommand, { cwd: ROOT, stdio: JSON_OUT ? "pipe" : "inherit" });
-    checksResult = "pass";
+    execSync(command, { cwd: ROOT, stdio: JSON_OUT ? "pipe" : "inherit" });
+    hookResults[label] = "pass";
   } catch {
-    checksResult = "fail";
-    errors.push(`Checks-commando faalde: \`${CONFIG.checksCommand}\``);
+    hookResults[label] = "fail";
+    errors.push(`${label}-commando faalde: \`${command}\``);
   }
 }
+const checksResult = hookResults.checks ?? null;
 
 // ── 4b. Geen testcommando ingesteld? Maak dat zichtbaar ──────────────────────
-// Anders draaien de inhoudelijke checks stilletjes niet en lijkt alles groen.
+// Anders draaien de inhoudelijke checks stilletjes niet en lijkt alles groen. De
+// quality/security-hooks zijn bewust opt-in (default uit) — daar nag de check niet over,
+// hij noemt ze alleen als er nog geen enkele hook draait.
 const hasCheckUnits = [...units.values()].some(u => u.type === "check");
 let checksNotice = null;
 if (!CONFIG.checksCommand) {
@@ -179,8 +207,9 @@ if (!CONFIG.checksCommand) {
     warnings.push(`Tests niet gedraaid: er zijn check-units, maar CONFIG.checksCommand staat op null — ` +
       `zet je testcommando (bv. "node --test") zodat de checks meedraaien.`);
   } else {
-    checksNotice = `geen checksCommand ingesteld — alleen structurele controle, er zijn geen tests gedraaid. ` +
-      `Zet CONFIG.checksCommand (bv. "node --test", "pytest", "go test ./...") of vraag je agent (skill run-checks).`;
+    checksNotice = `geen command-hooks ingesteld — alleen structurele controle, er zijn geen tests/` +
+      `quality/security-checks gedraaid. Zet CONFIG.checksCommand / qualityCommand / securityCommand ` +
+      `(bv. "pytest", "ruff check .", "pip-audit") of vraag je agent (skill run-checks).`;
   }
 }
 
@@ -188,7 +217,8 @@ if (!CONFIG.checksCommand) {
 const summary = {
   units: units.size,
   ankers: anchors.size,
-  checksCommand: checksResult,
+  checksCommand: checksResult,            // backward-compat
+  hooks: hookResults,                     // { checks?, quality?, security? }
   checksNotice,
   errors,
   warnings: STRICT ? [] : warnings,
@@ -198,8 +228,9 @@ const summary = {
 if (JSON_OUT) {
   console.log(JSON.stringify({ ok: errors.length === 0 && (!STRICT || warnings.length === 0), ...summary }, null, 2));
 } else {
+  const hookLine = Object.entries(hookResults).map(([k, v]) => `${k}: ${v}`).join(", ");
   console.log(`\n  drift-check — ${units.size} units, ${anchors.size} ankers` +
-    (checksResult ? `, checks: ${checksResult}` : ""));
+    (hookLine ? `, ${hookLine}` : ""));
   if (checksNotice) console.log(`\n  ℹ ${checksNotice}`);
   if (errors.length) {
     console.log(`\n  ✗ ${errors.length} fout(en):`);
