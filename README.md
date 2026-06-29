@@ -149,8 +149,10 @@ korte gesprekje.
 | `vibe-kit.config.mjs` | jouw instellingen voor de bewaker (o.a. de optionele test-, kwaliteit- en security-checks); staat los van de bewaker zodat een update je instellingen niet overschrijft |
 | `playbook.md` | lessen die het project gaandeweg leert |
 | `docs/WHY.md` | de wetenschappelijke onderbouwing achter de aanpak |
+| `docs/ALGORITHM.md` | het volledige proces stap voor stap (hoe de kit precies werkt) |
 
-Meer weten over het waarom? Zie [`docs/WHY.md`](docs/WHY.md), met cijfers en bronnen.
+Meer weten? Zie [`docs/WHY.md`](docs/WHY.md) voor het waarom (met cijfers en bronnen) en
+[`docs/ALGORITHM.md`](docs/ALGORITHM.md) voor het volledige proces stap voor stap.
 
 ## Toevoegen aan een bestaand project
 
