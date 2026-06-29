@@ -1,6 +1,8 @@
 # vibe-kit
 
-> **AI laat je razendsnel software bouwen — maar vergeet onderweg waaróm je keuzes maakte.**
+*Intentie-gericht vibe coden.*
+
+> **AI laat je razendsnel software bouwen, maar vergeet onderweg waaróm je keuzes maakte.**
 > Daardoor worden projecten al snel rommelig: dubbel werk, wankele structuur, dingen die elkaar
 > breken. vibe-kit lost dat op door de bedoeling achter je project op te schrijven én je AI-assistent
 > te laten overleggen vóórdat hij begint te bouwen.
