@@ -85,6 +85,15 @@ bevestiging voor. Alle drie staan standaard **uit**: stel je niets in, dan veran
 > Kort samengevat: **bedoeling (`wiki/`) ⇄ anker (`PW:`) ⇄ code**, met de bewaker eromheen die ze
 > gekoppeld houdt.
 
+## Kost dit extra tijd of rekenkracht?
+
+Kort gezegd: vibe-kit **verschuift** het werk van je AI-assistent van "rondzoeken en achteraf
+herstellen" naar "vooraf de bedoeling vastleggen en verifiëren". Voor één losse wijziging kan het totaal
+iets omhooggaan; over de levensduur van een project kan het juist omlaag, doordat er minder herwerk en
+dubbel werk is. En omdat de aanpak meeschaalt met hoe groot de wijziging is, betaal je die moeite alleen
+waar hij iets oplevert — een typo verbeteren kost niks extra. (Onderzoek vond zelfs dat een kort
+context-bestand zoals dit de doorlooptijd en het verbruik kán verlágen; zie [`docs/WHY.md`](docs/WHY.md).)
+
 ---
 
 ## Vereisten & compatibiliteit
@@ -165,11 +174,40 @@ dezelfde methode, maar met een ander gewicht:
 - **vibe-kit** is de lean variant voor **technische bouwers met een capabele agent**: minimale
   overhead, in een paar minuten te begrijpen en aan te passen.
 
+Product Wiki is rijker in *productmodellering* (atomaire units als actors, jobs, stories en journeys,
+gericht op ook niet-technische operators). vibe-kit laat die laag bewust weg en legt eigen accenten op
+**verificatie en zelfstandig bouwen**. Bovenop de gedeelde methode voegt het toe:
+
+- **Opt-in quality- en security-hooks** in de bewaker — naast je tests kun je een lint-/complexiteits-
+  en een kwetsbaarheden-check laten meedraaien (default uit; je assistent stelt ze voor).
+- **Een lerend playbook** (`playbook.md`, ACE-patroon) — gecureerde lessen die tussen sessies meereizen.
+- **Reverse-import** (`import-codebase`) — bestaande code terugvertalen naar wiki-intentie.
+- **Non-destructieve installer** (`add-to-project.mjs`) — de methode toevoegen aan een bestaand project
+  zonder iets te overschrijven.
+- **Agent-gestuurde onboarding** — een kort gesprek in plaats van handmatige setup.
+
 Daarnaast is vibe-kit **Nederlandstalig**, terwijl Product Wiki Engels-only is — de methode zelf
 werkt in elke taal, maar de uitvoering van Product Wiki is volledig in het Engels.
 
 Kies vibe-kit als je licht en snel (en in het Nederlands) wilt; kies Product Wiki als je de complete,
 voorschrijvende aanpak wilt.
+
+## Naast andere AI-coding tools
+
+Het idee van een intentielaag boven AI-code is niet uniek — het is een druk, snelgroeiend veld. Grofweg
+twee populaire families:
+
+- **Spec-driven frameworks** — zoals [GitHub Spec Kit](https://github.com/github/spec-kit),
+  [BMAD-METHOD](https://github.com/bmad-code-org/bmad-method) en [Amazon Kiro](https://kiro.dev/): van
+  spec naar plan naar taken naar code. Krachtig, maar vaak zwaar (een eigen IDE, tientallen agents en
+  workflows).
+- **Geheugen-frameworks** — zoals [Cline Memory Bank](https://docs.cline.bot/features/memory-bank):
+  vaste Markdown-bestanden die je project "onthouden" tussen sessies. Licht, maar passief — ze bewaren
+  context, maar bewaken niet of code en bedoeling samen blijven lopen.
+
+vibe-kit mikt op het gat ertussen: **bedoeling en code actief gekoppeld houden** (via de `PW:`-ankers en
+de bewaker) mét **minimale overhead** (dependency-vrij, elke taal en agent, in minuten te begrijpen).
+Niet het breedste of zwaarste — wel licht én zelf-bewakend.
 
 ## Credit & licentie
 
