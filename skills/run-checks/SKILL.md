@@ -23,11 +23,19 @@ Acceptatiecriteria zijn pas echt afdwingbaar als ze uitvoerbaar zijn.
    ```
 3. **Hergebruik de bestaande test-/eval-infrastructuur** van het project. Introduceer geen parallel
    scoringssysteem.
-4. **Koppel het testcommando aan de drift-check** (als dat nog niet is gebeurd bij de onboarding).
-   Detecteer het commando uit de stack — `package.json` → `npm test`, `pyproject`/`pytest` → `pytest`,
-   `go.mod` → `go test ./...` — **stel het ter bevestiging voor** aan de gebruiker, en zet het dan in
-   `CONFIG.checksCommand` in `scripts/drift-check.mjs`. Zolang dit op `null` staat draait de drift-check
-   je tests niet en herinnert hij daaraan.
+4. **Koppel de command-hooks aan de drift-check** (als dat nog niet is gebeurd bij de onboarding).
+   De drift-check kent drie optionele hooks in `scripts/drift-check.mjs`, alle **default `null`**:
+   - `checksCommand` — je tests. Detecteer uit de stack — `package.json` → `npm test`,
+     `pyproject`/`pytest` → `pytest`, `go.mod` → `go test ./...`. Zolang dit op `null` staat draait de
+     drift-check je tests niet en herinnert hij daaraan.
+   - `qualityCommand` — lint/complexiteit. Bijv. `npm run lint`, `ruff check .`, `golangci-lint run`.
+   - `securityCommand` — kwetsbaarheden/secrets. Geef voorkeur aan toolchain-eigen tools (geen extra
+     install): `npm audit --audit-level=high`, `pip-audit`, `govulncheck ./...`,
+     `dotnet list package --vulnerable`.
+
+   **Stel elke detecteerbare hook ter bevestiging voor** (een bevestiging, geen open technische vraag),
+   en zet 'm bij akkoord in de bijbehorende `CONFIG.*`. Vind je geen passende tool, laat de hook dan op
+   `null` — de hooks zijn bewust opt-in. Zie [`dec-quality-security-hooks`](../../wiki/decisions/quality-security-hooks.md).
 5. **Draai en bevestig** dat álle criteria slagen.
 
 ## Principe

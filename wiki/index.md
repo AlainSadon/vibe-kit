@@ -25,6 +25,7 @@ gelinkt Markdown-bestand. ID's zijn stabiel en grep-baar.
 | `dec-projecten-private` | Projecten gemaakt mét de kit zijn standaard private | active |
 | `dec-onboarding-via-agent` | Onboarding via agent-interview (skill), niet via flags | active |
 | `dec-bestaand-project-installatie` | Bestaand project: non-destructieve installer `add-to-project.mjs` | active |
+| `dec-quality-security-hooks` | Quality- en security-hooks: opt-in command-hooks, default `null`, agent stelt voor | active |
 
 ## Checks
 | ID | Verifieert | Status |

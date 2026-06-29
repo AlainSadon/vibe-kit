@@ -54,6 +54,24 @@ kan **overbodig** zijn bij taken die juist baat hebben bij beknopte instructies.
 → Onderbouwt [`playbook.md`](../playbook.md) — **mits selectief toegepast**. Voor een bewust lean kit
 is dat geen detail maar een gebruiksrichtlijn; ze staat in het playbook zelf.
 
+### 5. AI-code faalt vooral op security en sluipende onderhoudsschuld — daar horen poorten
+Onderzoek naar AI-gegenereerde code wijst twee risico's als dominant aan: **beveiligingsfouten** en
+**technische schuld** die sneller groeit dan de tests. Gerapporteerde cijfers: ~40% van Copilots
+suggesties in relevante context bevatte een security-bug (arXiv 2310.02059); breder circuleren cijfers
+als ~45% kwetsbare AI-code en meer issues per AI-PR dan per mens-PR. Het arXiv-onderzoek *Vibe Coding in
+Practice* (2512.11922) noemt expliciet **architecturale inconsistentie, security-gaten en het ontbreken
+van vastgelegde ontwerp-rationale** als oorzaken van schuld. Praktijkguidance (CodeScene) beveelt drie
+gates aan: codekwaliteit, code-begrip en testdekking. *(Verificatie: §1–4 zijn primair geverifieerd;
+deze §5 leunt op lichtere bronnen — de Vibe-Coding-bevinding via de abstract, de CodeScene-gates via het
+gelezen artikel, de percentages via secundaire aggregatie / zoek-snippets en dus **niet primair
+geverifieerd**.)*
+
+→ Onderbouwt de **opt-in command-hooks** `qualityCommand` en `securityCommand` naast `checksCommand`:
+zie [`dec-quality-security-hooks`](../wiki/decisions/quality-security-hooks.md). Bewust *opt-in* (default
+uit) en *via het project's eigen tooling* — niet als ingebouwde scanner — om de lean, stack-agnostische
+aard te bewaren ([`rule-lean-contract`](../wiki/rules/lean-contract.md)). Het ontbreken van
+ontwerp-rationale dat het onderzoek aanwijst, is precies wat de `wiki/` al adresseert.
+
 ## Bronnen — met verificatiestatus
 
 **In het ontwerp verwerkt (primair geverifieerd):**
@@ -69,6 +87,12 @@ is dat geen detail maar een gebruiksrichtlijn; ze staat in het playbook zelf.
 **Alleen referentie/conventie — niet primair geverifieerd:**
 - [Memory in the Age of AI Agents: A Survey (arXiv 2512.13564)](https://arxiv.org/pdf/2512.13564) — *niet gelezen*
 - Praktijkbronnen (Anthropic best practices & Agent Skills, AGENTS.md-gidsen, Thoughtworks SDD) — *conventie via zoek-snippets, niet primair geverifieerd*
+
+**Onder §5 (lichtere verificatie — motiveert de hooks, draagt geen exacte cijfers):**
+- [Vibe Coding in Practice (arXiv 2512.11922)](https://arxiv.org/abs/2512.11922) — *abstract gelezen*
+- [Succeed with AI-assisted Coding — Guardrails & Metrics (CodeScene)](https://codescene.com/blog/implement-guardrails-for-ai-assisted-coding) — *artikel gelezen (praktijkbron)*
+- [Security Weaknesses of Copilot-Generated Code (arXiv 2310.02059)](https://arxiv.org/pdf/2310.02059) — *via zoek-snippet, niet primair gelezen*
+- Aggregatie-cijfers (~45% kwetsbaar, issues/PR) via secundaire blogs — *niet primair geverifieerd*
 
 > Eerder stond hier arXiv 2510.26493 ("Context Engineering 2.0") vermeld; dat is verwijderd omdat het
 > abusievelijk met ACE was verward en niet in het ontwerp is gebruikt.

@@ -72,7 +72,9 @@ units; forceer geen volledige wiki vooraf. Zie [`wiki/index.md`](wiki/index.md).
 
 - **Drift-loops:** draai `node scripts/drift-check.mjs` (periodiek of in CI). Objectieve gaten
   (verweesd anker, ontbrekende check) repareer je; subjectieve (architectuur-sprawl) leg je voor.
-  Zie de skill [`reconcile-wiki`](skills/reconcile-wiki/SKILL.md).
+  Zie de skill [`reconcile-wiki`](skills/reconcile-wiki/SKILL.md). De drift-check kan optioneel ook je
+  test-, quality- en security-commando meedraaien (opt-in, default uit) — zie de skill
+  [`run-checks`](skills/run-checks/SKILL.md).
 - **Playbook:** noteer herbruikbare lessen in [`playbook.md`](playbook.md) (ACE-patroon) zodat
   toekomstige sessies ervan profiteren.
 

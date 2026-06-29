@@ -76,6 +76,12 @@ automatisch laten draaien bij elke wijziging.
 En "het is klaar als…" uit een voorstel wordt telkens een **automatische test**, zodat "werkt het
 echt?" geen mening is maar iets dat gecontroleerd wordt.
 
+De bewaker kan optioneel ook drie **commando's** van je eigen project meedraaien: je tests, een
+**kwaliteits-check** (lint/complexiteit) en een **security-check** (kwetsbaarheden, secrets). De kit
+levert die tools niet zelf — hij roept aan wat jouw stack al heeft, geeft voorkeur aan tools die al
+geïnstalleerd zijn (zoals `npm audit`), en je assistent stelt ze net als het testcommando ter
+bevestiging voor. Alle drie staan standaard **uit**: stel je niets in, dan verandert er niets.
+
 > Kort samengevat: **bedoeling (`wiki/`) ⇄ anker (`PW:`) ⇄ code**, met de bewaker eromheen die ze
 > gekoppeld houdt.
 
@@ -92,6 +98,9 @@ echt?" geen mening is maar iets dat gecontroleerd wordt.
 **Optioneel:**
 - [`gh` (GitHub CLI)](https://cli.github.com/) — alleen voor de template-route hieronder.
 - GitHub Actions — alleen als je de bewaker ook automatisch in de cloud wilt laten draaien (de CI).
+- Een test-, lint- en/of security-tool van je eigen stack — *alleen* als je de bijbehorende hooks
+  aanzet (zie *Onder de motorkap*). Default staan ze uit, dus standaard installeer je hier niets extra;
+  vaak zit de tool al in je toolchain (bv. `npm audit`).
 
 **Werkt met welke agents?** `AGENTS.md` is een [open standaard](https://agents.md/) die door meerdere
 tools wordt gelezen — o.a. Claude Code, OpenAI Codex en Cursor — dus vibe-kit is niet tool-specifiek.
