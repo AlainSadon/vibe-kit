@@ -118,21 +118,25 @@ tools wordt gelezen — o.a. Claude Code, OpenAI Codex en Cursor — dus vibe-ki
 `CLAUDE.md` is enkel een pointer voor Claude Code. De `skills/` laden in Claude Code automatisch
 on-demand; andere agents lezen ze als gewone gelinkte bestanden. Tot nu toe getest met Claude Code.
 
-## Aan de slag (voor wie ermee gaat bouwen)
+## Aan de slag
 
-Dit deel is technisch.
+**De makkelijkste manier:** open je AI-assistent (bv. Claude Code) in je project (nieuw of bestaand) en
+vraag simpelweg: *"Installeer github.com/AlainSadon/vibe-kit."* De assistent regelt de installatie en
+stelt je daarna een paar korte vragen (wat ga je bouwen, en je testcommando als dat detecteerbaar is).
+Daarna stel je je eerste vraag en begint de werkwijze hierboven.
+
+**Liever zelf, met de hand?** Maak een nieuw project van de template:
 
 ```sh
 gh repo create <project> --template AlainSadon/vibe-kit --private --clone
 cd <project>
 ```
 
-Open daarna je AI-assistent (bv. Claude Code) in het project. Bij een vers project richt hij zichzelf
-in met een kort gesprekje: hij ruimt de voorbeeld-inhoud op, vraagt wat je gaat bouwen en stelt — als
-het detecteerbaar is — je testcommando voor. Daarna stel je je eerste vraag en begint de werkwijze
-hierboven.
+Open daarna je AI-assistent in het project; bij een vers project richt hij zichzelf in met datzelfde
+korte gesprekje.
 
 > Liever zonder GitHub-template? `npx degit AlainSadon/vibe-kit <project>` kopieert de bestanden ook.
+> Heb je al een project? Zie *Toevoegen aan een bestaand project* hieronder.
 
 ### Wat zit erin
 
@@ -169,7 +173,10 @@ voor om met `import-codebase` je bestaande code naar wiki-intentie om te zetten.
 
 ### De kit updaten
 
-Komt er een nieuwe versie van vibe-kit uit? Werk dan alleen de "motor" bij, met dezelfde installer:
+Komt er een nieuwe versie van vibe-kit uit? **Vraag je AI-assistent simpelweg om vibe-kit te upgraden**;
+hij kent de procedure (skill `upgrade-kit`) en draait de stappen voor je.
+
+Liever zelf? Werk alleen de "motor" bij, met dezelfde installer:
 
 ```sh
 npx degit AlainSadon/vibe-kit .vibe-kit-install
@@ -226,6 +233,11 @@ twee populaire families:
 vibe-kit mikt op het gat ertussen: **bedoeling en code actief gekoppeld houden** (via de `PW:`-ankers en
 de bewaker) mét **minimale overhead** (dependency-vrij, elke taal en agent, in minuten te begrijpen).
 Niet het breedste of zwaarste — wel licht én zelf-bewakend.
+
+## Status
+
+vibe-kit is in actieve ontwikkeling. Ik gebruik het in mijn eigen projecten, leer daarvan en verbeter
+de kit. Upgraden binnen je eigen project kan door het de assistent te vragen (zie *De kit updaten*).
 
 ## Credit & licentie
 
