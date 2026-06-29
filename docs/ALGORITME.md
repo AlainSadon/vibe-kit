@@ -42,6 +42,7 @@ weinig ruimte tot improviseren overblijft.
 | **`PW:`-ankers** | Grep-bare verwijzingen *in de code* naar een wiki-ID. De brug tussen intentie en implementatie; basis voor drift-detectie. |
 | [`skills/`](../skills/) | Stap-voor-stap procedures die **pas laden wanneer nodig**. Houden het contract kort. |
 | [`scripts/drift-check.mjs`](../scripts/drift-check.mjs) | Dependency-vrije detector die units ↔ ankers ↔ checks kruist en gaten meldt. |
+| [`vibe-kit.config.mjs`](../vibe-kit.config.mjs) | Gebruikers-instellingen voor de detector (wikiDir, ignoreDirs, codeExts, anchorableTypes, de hooks). Apart van de motor, zodat een upgrade het niet overschrijft. |
 | [`.github/workflows/drift.yml`](../.github/workflows/drift.yml) | Draait de drift-check in **CI** (git-niveau poort). |
 | **git** | Versiebeheer: diff = de eenheid van review (`review-diff`); commit/merge = de momenten waarop de poorten sluiten. |
 | [`playbook.md`](../playbook.md) | Lerend geheugen (ACE-patroon): gecureerde, herbruikbare lessen voor toekomstige sessies. |
@@ -64,7 +65,7 @@ A2. Staat bovenaan nog de letterlijke [PROJECT: …]-placeholder?
               - Bestaat er al code? → stel skill `import-codebase` voor
                 (wiki bootstrappen uit bestaande code, in batches, met review).
               - Detecteer het testcommando (npm test / pytest / go test …)
-                en stel voor het als CONFIG.checksCommand te zetten.
+                en stel voor het als checksCommand in vibe-kit.config.mjs te zetten.
               - Verifieer: node scripts/drift-check.mjs is schoon.
       NEE → project is al ingericht → ga naar FASE B.
       (Uitzondering: werk je aan vibe-kit ZÉLF, dan is de placeholder bewust
@@ -221,9 +222,10 @@ Dit zijn **vragen, geen formulieren**. Bij elke kleine en substantiële wijzigin
 | 5 | **Command-hooks** — draait optioneel `checksCommand` / `qualityCommand` / `securityCommand` | FOUT bij falen |
 
 De drie command-hooks staan **default op `null`** (uit) en draaien telkens het commando van het project
-zelf — de kit levert geen scanners en blijft zo dependency-vrij en stack-agnostisch. De agent detecteert
-ze en stelt ze ter bevestiging voor, net als het testcommando (skills `start-project` / `run-checks`,
-zie [`docs/WHY.md`](WHY.md) §5). Staat `checksCommand` op `null`, dan draait alleen de structurele
+zelf; de kit levert geen scanners en blijft zo dependency-vrij en stack-agnostisch. Ze staan, net als de
+overige instellingen, in `vibe-kit.config.mjs` (de project-root) en niet in het script zelf, zodat een
+upgrade ze niet overschrijft. De agent detecteert ze en stelt ze ter bevestiging voor, net als het
+testcommando (skills `start-project` / `run-checks`, zie [`docs/WHY.md`](WHY.md) §5). Staat `checksCommand` op `null`, dan draait alleen de structurele
 controle en **herinnert** het script eraan dat er geen tests meedraaien (zodat groen niet vals groen is);
 over de bewust opt-in quality/security-hooks nag het niet. `--strict` promoveert waarschuwingen tot
 fouten (voor CI); `--json` geeft machine-leesbare output (voor agent-loops).

@@ -27,6 +27,7 @@ gelinkt Markdown-bestand. ID's zijn stabiel en grep-baar.
 | `dec-bestaand-project-installatie` | Bestaand project: non-destructieve installer `add-to-project.mjs` | active |
 | `dec-quality-security-hooks` | Quality- en security-hooks: opt-in command-hooks, default `null`, agent stelt voor | active |
 | `dec-positionering` | Niche: drift-handhaving + minimale overhead, tussen zware SDD-frameworks en passief geheugen | active |
+| `dec-config-bestand` | Instellingen apart in `vibe-kit.config.mjs` (motor/inhoud-scheiding) voor upgradeerbaarheid | active |
 
 ## Checks
 | ID | Verifieert | Status |

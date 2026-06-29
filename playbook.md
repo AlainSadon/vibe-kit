@@ -21,8 +21,8 @@
 - **Sluit tijdelijke/installatie-mappen uit van de drift-check (of ruim ze op vóór je checkt).** Een
   map als `.vibe-kit-install` bevat kopieën van de kit-scripts mét het dogfood-anker; scant de
   drift-check die mee, dan meldt hij een vals "verweesd anker". Opgelost door `.vibe-kit-install` aan
-  `CONFIG.ignoreDirs` toe te voegen en de opruim-stap vóór de check te zetten. (gevonden bij een
-  dogfood-test van [`add-to-project`](scripts/add-to-project.mjs) op een bestaand project)
+  `ignoreDirs` (in `vibe-kit.config.mjs`) toe te voegen en de opruim-stap vóór de check te zetten.
+  (gevonden bij een dogfood-test van [`add-to-project`](scripts/add-to-project.mjs) op een bestaand project)
 - **Stel vragen aan de mens in mensentaal, zonder interne unit-id's of jargon.** Bij onboarding/
   bevestiging zag een tester "reset draaien? de wiki bevat nog `dec-naam-vibe-kit`" — verwarrend,
   want die id zegt een gebruiker niets. Beschrijf het effect ("de voorbeeld-inhoud wissen en met een

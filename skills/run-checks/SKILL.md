@@ -24,7 +24,8 @@ Acceptatiecriteria zijn pas echt afdwingbaar als ze uitvoerbaar zijn.
 3. **Hergebruik de bestaande test-/eval-infrastructuur** van het project. Introduceer geen parallel
    scoringssysteem.
 4. **Koppel de command-hooks aan de drift-check** (als dat nog niet is gebeurd bij de onboarding).
-   De drift-check kent drie optionele hooks in `scripts/drift-check.mjs`, alle **default `null`**:
+   De drift-check kent drie optionele hooks in `vibe-kit.config.mjs` (de project-root), alle
+   **default `null`**:
    - `checksCommand` — je tests. Detecteer uit de stack — `package.json` → `npm test`,
      `pyproject`/`pytest` → `pytest`, `go.mod` → `go test ./...`. Zolang dit op `null` staat draait de
      drift-check je tests niet en herinnert hij daaraan.
@@ -34,8 +35,10 @@ Acceptatiecriteria zijn pas echt afdwingbaar als ze uitvoerbaar zijn.
      `dotnet list package --vulnerable`.
 
    **Stel elke detecteerbare hook ter bevestiging voor** (een bevestiging, geen open technische vraag),
-   en zet 'm bij akkoord in de bijbehorende `CONFIG.*`. Vind je geen passende tool, laat de hook dan op
-   `null` — de hooks zijn bewust opt-in. Zie [`dec-quality-security-hooks`](../../wiki/decisions/quality-security-hooks.md).
+   en zet 'm bij akkoord in de bijbehorende sleutel in `vibe-kit.config.mjs`. Vind je geen passende
+   tool, laat de hook dan op `null`; de hooks zijn bewust opt-in. Zie
+   [`dec-quality-security-hooks`](../../wiki/decisions/quality-security-hooks.md) en
+   [`dec-config-bestand`](../../wiki/decisions/config-bestand.md).
 5. **Draai en bevestig** dat álle criteria slagen.
 
 ## Principe

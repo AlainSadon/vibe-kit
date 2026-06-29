@@ -17,52 +17,38 @@
 //   3. Regel zonder check  — actieve rule/capability waar geen check-unit naar linkt      -> waarschuwing
 //   4. Verweesde check     — check-unit die naar een niet-bestaande ID linkt              -> FOUT
 //   5. Command-hooks        — optioneel: draait je test-, quality- en security-commando
-//                            (CONFIG.checksCommand / qualityCommand / securityCommand)
+//                            (checksCommand / qualityCommand / securityCommand in vibe-kit.config.mjs)
 
 // PW: cap-drift-detectie — dit script realiseert de drift-detectie, zie wiki/capabilities/drift-detectie.md
 import { readFileSync, readdirSync, statSync } from "node:fs";
 import { join, relative, sep, extname } from "node:path";
+import { pathToFileURL } from "node:url";
 import { execSync } from "node:child_process";
 
-// ── Configuratie (pas aan per project) ──────────────────────────────────────
-const CONFIG = {
+// ── Configuratie ─────────────────────────────────────────────────────────────
+// De instelbare waarden staan in `vibe-kit.config.mjs` in de project-root, NIET hier — zo
+// overschrijft een upgrade van dit script je instellingen niet. De waarden hieronder zijn alleen
+// de fallback-defaults: ze gelden wanneer dat bestand (of een sleutel erin) ontbreekt.
+const DEFAULTS = {
   wikiDir: "wiki",                 // waar de intentie-units staan
-  // Mappen die nooit gescand worden op ankers:
   ignoreDirs: ["node_modules", ".git", "dist", "build", "out", "coverage", "wiki", ".next", "vendor", ".vibe-kit-install"],
-  // Bestandsextensies die als "code" gelden voor de anker-scan:
   codeExts: [".ts", ".tsx", ".js", ".jsx", ".mjs", ".cjs", ".py", ".go", ".rs", ".java", ".rb", ".php", ".cs", ".kt", ".swift", ".css", ".scss", ".vue", ".svelte", ".sql", ".sh"],
-  // Unit-types die in code verankerd én getest horen te zijn:
-  anchorableTypes: ["rule", "capability"],
-  // ── Command-hooks (alle drie optioneel, null = uit) ───────────────────────
-  // Elke hook draait een commando van JOUW project; de kit levert geen scanners zelf
-  // en blijft zo dependency-vrij en stack-agnostisch. null = niet ingesteld → die hook
-  // draait niet. Je agent detecteert en stelt ze voor, net als het projectdoel
-  // (skills start-project / run-checks). Zie wiki/decisions/quality-security-hooks.md.
-  //
-  // 1. Test-/eval-commando dat alle acceptatiecriteria verifieert. Bijvoorbeeld:
-  //   "node --test"        (Node ingebouwde test-runner)
-  //   "npm test --silent"  (npm-script)
-  //   "pytest -q"          (Python)
-  //   "go test ./..."      (Go)
-  //   "dotnet test"        (.NET)
-  checksCommand: null,
-  // 2. Kwaliteits-/lint-commando (complexiteit, duplicatie, stijl). Bijvoorbeeld:
-  //   "npm run lint"       (ESLint e.d.)
-  //   "ruff check ."       (Python)
-  //   "golangci-lint run"  (Go)
-  //   "dotnet format --verify-no-changes"  (.NET)
-  qualityCommand: null,
-  // 3. Security-commando (kwetsbaarheden, secrets, kwetsbare dependencies). Geef de
-  //    voorkeur aan tooling die al in je toolchain zit (geen extra install):
-  //   "npm audit --audit-level=high"          (JS — ingebouwd)
-  //   "pip-audit"                              (Python)
-  //   "govulncheck ./..."                      (Go)
-  //   "dotnet list package --vulnerable"       (.NET — ingebouwd)
-  //   "cargo audit"                            (Rust) · "gitleaks detect" (secrets, elke taal)
-  securityCommand: null,
+  anchorableTypes: ["rule", "capability"],   // typen die verankerd én getest horen te zijn
+  checksCommand: null,             // tests; null = uit (zie vibe-kit.config.mjs voor voorbeelden)
+  qualityCommand: null,            // lint/complexiteit; null = uit
+  securityCommand: null,           // kwetsbaarheden/secrets; null = uit
 };
 
 const ROOT = process.cwd();
+
+// Laad de gebruikersconfig en leg die over de defaults heen. Ontbreekt het bestand of is het
+// ongeldig, dan gelden de defaults (de drift-check blijft dus altijd werken).
+let userConfig = {};
+try {
+  userConfig = (await import(pathToFileURL(join(ROOT, "vibe-kit.config.mjs")).href)).default ?? {};
+} catch { /* geen/ongeldig vibe-kit.config.mjs → defaults gelden */ }
+const CONFIG = { ...DEFAULTS, ...userConfig };
+
 const ARGS = new Set(process.argv.slice(2));
 const STRICT = ARGS.has("--strict");
 const JSON_OUT = ARGS.has("--json");
@@ -204,12 +190,12 @@ const hasCheckUnits = [...units.values()].some(u => u.type === "check");
 let checksNotice = null;
 if (!CONFIG.checksCommand) {
   if (hasCheckUnits) {
-    warnings.push(`Tests niet gedraaid: er zijn check-units, maar CONFIG.checksCommand staat op null — ` +
-      `zet je testcommando (bv. "node --test") zodat de checks meedraaien.`);
+    warnings.push(`Tests niet gedraaid: er zijn check-units, maar checksCommand staat op null. ` +
+      `Zet je testcommando (bv. "node --test") in vibe-kit.config.mjs zodat de checks meedraaien.`);
   } else {
-    checksNotice = `geen command-hooks ingesteld — alleen structurele controle, er zijn geen tests/` +
-      `quality/security-checks gedraaid. Zet CONFIG.checksCommand / qualityCommand / securityCommand ` +
-      `(bv. "pytest", "ruff check .", "pip-audit") of vraag je agent (skill run-checks).`;
+    checksNotice = `geen command-hooks ingesteld: alleen structurele controle, er zijn geen tests/` +
+      `quality/security-checks gedraaid. Zet checksCommand / qualityCommand / securityCommand in ` +
+      `vibe-kit.config.mjs (bv. "pytest", "ruff check .", "pip-audit") of vraag je agent (skill run-checks).`;
   }
 }
 

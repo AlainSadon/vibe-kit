@@ -121,8 +121,9 @@ copyIfAbsent("CLAUDE.md");
 // 2. De skills (recepten voor de agent).
 copyDirIfAbsent("skills");
 
-// 3. De bewaker + CI.
+// 3. De bewaker + zijn config + CI.
 copyIfAbsent("scripts/drift-check.mjs");
+copyIfAbsent("vibe-kit.config.mjs");
 copyIfAbsent(".github/workflows/drift.yml");
 
 // 4. Lege wiki-structuur + playbook.

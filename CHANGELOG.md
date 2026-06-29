@@ -5,6 +5,16 @@ Alle noemenswaardige wijzigingen aan vibe-kit. Formaat losjes gebaseerd op
 
 ## [Unreleased]
 
+### Added
+- Opt-in **quality- en security-hooks** in de drift-check (`qualityCommand`, `securityCommand`), naast
+  het bestaande `checksCommand`. Default `null`; de agent detecteert en stelt ze voor zoals het
+  testcommando. De kit levert geen scanners zelf, het roept de tools van je project aan.
+  `dec-quality-security-hooks`; onderbouwing in `docs/WHY.md` §5.
+- `vibe-kit.config.mjs`: de instellingen van de drift-check (`wikiDir`, `ignoreDirs`, `codeExts`,
+  `anchorableTypes` en de hooks) staan nu in een apart config-bestand i.p.v. in `scripts/drift-check.mjs`.
+  Zo overschrijft een upgrade van het script je instellingen niet. Het script houdt interne defaults en
+  merget de config eroverheen (ontbrekend bestand/sleutel valt terug op de default). `dec-config-bestand`.
+
 ### Changed
 - `start-project` stelt de reset-vraag nu in mensentaal (geen interne unit-id's) — gevonden tijdens
   een dogfood-test. Eerste les vastgelegd in `playbook.md`.

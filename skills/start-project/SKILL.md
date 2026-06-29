@@ -60,7 +60,7 @@ plus één simpele bevestiging** — niet meer.
    > "Ik zie dat je `npm test` gebruikt — zal ik dat als checks-commando instellen, zodat de
    > drift-check je tests meedraait?"
 
-   Zet bij akkoord `CONFIG.checksCommand` in `scripts/drift-check.mjs`. Vind je niets (kaal nieuw
+   Zet bij akkoord `checksCommand` in `vibe-kit.config.mjs` (de project-root). Vind je niets (kaal nieuw
    project zonder tests), **sla het over**; het wordt later gezet bij de eerste
    [`run-checks`](../run-checks/SKILL.md), en de drift-check herinnert eraan zolang het op `null` staat.
 

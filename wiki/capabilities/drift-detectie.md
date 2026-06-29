@@ -11,8 +11,13 @@ regel zonder anker (waarschuwing), regel zonder check (waarschuwing), verweesde 
 exit-codet non-zero bij fouten, zodat hij direct als CI-poort of in een agent-loop werkt. Dit is het
 deterministische handhavingsmechanisme achter de drift-loops uit het contract.
 
+De instelbare waarden (wikiDir, ignoreDirs, codeExts, anchorableTypes en de hooks) staan in
+`vibe-kit.config.mjs` in de project-root, niet in het script zelf, zodat een upgrade van de motor je
+instellingen niet overschrijft; het script houdt interne defaults en merget de config eroverheen. Zie
+[`dec-config-bestand`](../decisions/config-bestand.md).
+
 De command-hooks (`checksCommand`, `qualityCommand`, `securityCommand`) staan **default op `null`** en
-draaien het commando van het project zelf — de kit levert geen scanners en blijft zo dependency-vrij en
+draaien het commando van het project zelf; de kit levert geen scanners en blijft zo dependency-vrij en
 stack-agnostisch. Faalt een hook, dan is dat een fout. Zie [`dec-quality-security-hooks`](../decisions/quality-security-hooks.md).
 
 Waarom drift bewaken loont (verouderde context schaadt): zie [`docs/WHY.md` §2](../../docs/WHY.md).

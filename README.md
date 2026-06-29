@@ -141,7 +141,8 @@ hierboven.
 | `AGENTS.md` (+ `CLAUDE.md`) | de werkwijze die je AI-assistent automatisch leest |
 | `wiki/` | de bedoeling van je project, in gewone taal (de "notities") |
 | `skills/` | stap-voor-stap recepten voor de assistent |
-| `scripts/drift-check.mjs` + automatische controle (CI) | de bewaker die code en bedoeling gekoppeld houdt — handmatig én automatisch bij elke wijziging |
+| `scripts/drift-check.mjs` + automatische controle (CI) | de bewaker die code en bedoeling gekoppeld houdt, handmatig én automatisch bij elke wijziging |
+| `vibe-kit.config.mjs` | jouw instellingen voor de bewaker (o.a. de optionele test-, kwaliteit- en security-checks); staat los van de bewaker zodat een update je instellingen niet overschrijft |
 | `playbook.md` | lessen die het project gaandeweg leert |
 | `docs/WHY.md` | de wetenschappelijke onderbouwing achter de aanpak |
 
