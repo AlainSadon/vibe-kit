@@ -21,6 +21,10 @@ zodra een wijziging substantieel is (zie de ceremonie-tabel in `AGENTS.md`).
 4. **Wacht op goedkeuring.** Geen code vóór akkoord. Bij bijsturing: pas het voorstel aan en vraag
    opnieuw.
 
+**Afsluiter (letterlijk):** presenteer het voorstel, **stop**, en wacht — lees `compile-change` nog
+niet. Een brede opdracht ("doe alles", "maak af") is géén akkoord; een expliciet "akkoord" van de mens
+wel.
+
 ## Daarna
 
 Na akkoord → ga door met de skill `compile-change`. Log de goedkeuring later in `wiki/log.md`.

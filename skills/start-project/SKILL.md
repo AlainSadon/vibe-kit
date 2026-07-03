@@ -61,8 +61,9 @@ plus één simpele bevestiging** — niet meer.
    > drift-check je tests meedraait?"
 
    Zet bij akkoord `checksCommand` in `vibe-kit.config.mjs` (de project-root). Vind je niets (kaal nieuw
-   project zonder tests), **sla het over**; het wordt later gezet bij de eerste
-   [`run-checks`](../run-checks/SKILL.md), en de drift-check herinnert eraan zolang het op `null` staat.
+   project zonder tests), **sla het over — maar laat één zin achter** i.p.v. stil te skippen: *"Nog geen
+   stack, dus ik stel de checks nu niet in; zodra er code is doe ik dat via `run-checks`, en de
+   drift-check herinnert eraan."* Zo wordt het een bewuste keuze i.p.v. een gat.
 
    De drift-check kent op dezelfde manier twee optionele hooks die je hier mág voorstellen, maar **maak
    er geen formulier van**: een `qualityCommand` (lint, bv. `ruff check .`) en een `securityCommand`
@@ -79,6 +80,9 @@ plus één simpele bevestiging** — niet meer.
 De `[PROJECT: …]`-placeholder is vervangen door een echte beschrijving, de voorbeeld-inhoud is (zo
 nodig) opgeruimd, en de drift-check is schoon. Daarna kan de eerste substantiële vraag via
 `propose-change`.
+
+De ingevulde `[PROJECT: …]`-regel legt alleen vast *wát* we bouwen en voor wie — het is **geen
+toestemming om te bouwen**. Ga na de onboarding niet zelf aan de slag; wacht op een concrete opdracht.
 
 ## Niet doen
 

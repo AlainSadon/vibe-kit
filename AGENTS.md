@@ -25,7 +25,9 @@ Drie principes:
 2. **Beslis *wát* vóór *welke files*.** Bepaal eerst welke bedoeling verandert, pas daarna welke code
    je aanraakt.
 3. **De mens keurt intentie goed vóór code.** Een niet-triviale wijziging wordt eerst een *voorstel
-   in gewone taal* dat de mens goedkeurt. Geen code vóór akkoord.
+   in gewone taal* dat de mens goedkeurt. Geen code vóór akkoord. Let op de val: een
+   projectbeschrijving én een brede opdracht ("doe alles", "maak af", "goede setup") zijn een
+   *intentie*, geen bouwopdracht — na het voorstel STOP je tot de mens expliciet akkoord geeft.
 
 > Doel is **praktisch determinisme**: niet het model deterministisch maken, maar *wat* het moet
 > produceren zó vastpinnen dat er voor het *hoe* weinig ruimte tot improviseren overblijft.
