@@ -50,7 +50,7 @@ problemen vroeg vangen:
 
 (De volledige versie staat in [`AGENTS.md`](AGENTS.md).)
 
-## Onder de motorkap (de techniek, toegankelijk)
+## Onder de motorkap 
 
 Hoe houdt vibe-kit "code" en "bedoeling" nu echt aan elkaar vast? Met drie eenvoudige bouwstenen:
 

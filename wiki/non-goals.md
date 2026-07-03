@@ -1,6 +1,6 @@
 # Non-goals — wat vibe-kit bewust niet is
 
-- **Geen codegeneratie-religie.** Dit is een contract + poorten, geen belofte dat Engels magisch
+- **Geen codegeneratie-religie.** Dit is een contract + poorten, geen belofte dat Nederlands magisch
   naar code compileert. De waarde zit in gedeelde intentie en de goedkeuringspoort.
 - **Geen zware ceremonie.** Triviale wijzigingen gaan gewoon door; het proces schaalt mee met de
   wijziging. Over-specificatie schept starheid (onderbouwing: [`docs/WHY.md` §3](../docs/WHY.md)).
